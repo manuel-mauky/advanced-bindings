@@ -1,0 +1,18 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+
+    // testing
+    testCompile "eu.lestard:assertj-javafx:0.1.1"
+    testCompile "org.assertj:assertj-core:1.6.0"
+    testCompile "junit:junit:4.11"
+}
