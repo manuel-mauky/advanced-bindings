@@ -10,13 +10,16 @@ version = "0.1.0"
 
 repositories {
     mavenCentral()
+    maven{
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 
 dependencies {
 
     // testing
-    testCompile "eu.lestard:assertj-javafx:0.1.1"
+    testCompile "eu.lestard:assertj-javafx:0.1.2-SNAPSHOT"
     testCompile "org.assertj:assertj-core:1.6.0"
     testCompile "junit:junit:4.11"
 }
