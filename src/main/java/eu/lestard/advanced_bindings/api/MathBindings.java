@@ -1,7 +1,5 @@
 package eu.lestard.advanced_bindings.api;
 
-import eu.lestard.advanced_bindings.api.internal.math.Abs;
-import eu.lestard.advanced_bindings.api.internal.math.Acos;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.FloatBinding;
 import javafx.beans.binding.IntegerBinding;
@@ -11,34 +9,36 @@ import javafx.beans.value.ObservableFloatValue;
 import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableLongValue;
 
+import static javafx.beans.binding.Bindings.*;
+
 public class MathBindings {
 
     /**
      * Binding for {@link java.lang.Math#abs(int)}
      */
     public static IntegerBinding abs(final ObservableIntegerValue a) {
-        return Abs.abs(a);
+        return createIntegerBinding(() -> Math.abs(a.get()), a);
     }
 
     /**
      * Binding for {@link java.lang.Math#abs(double)}
      */
     public static DoubleBinding abs(final ObservableDoubleValue a) {
-        return Abs.abs(a);
+        return createDoubleBinding(() -> Math.abs(a.get()), a);
     }
 
     /**
      * Binding for {@link java.lang.Math#abs(long)}
      */
     public static LongBinding abs(final ObservableLongValue a) {
-        return Abs.abs(a);
+        return createLongBinding(() -> Math.abs(a.get()), a);
     }
 
     /**
      * Binding for {@link java.lang.Math#abs(float)}
      */
     public static FloatBinding abs(final ObservableFloatValue a) {
-        return Abs.abs(a);
+        return createFloatBinding(() -> Math.abs(a.get()), a);
     }
 
 
@@ -86,7 +86,7 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#acos(double)}
      */
     public static DoubleBinding acos(final ObservableDoubleValue a) {
-        return Acos.acos(a);
+        return createDoubleBinding(()->Math.acos(a.get()), a);
     }
 
 
@@ -195,14 +195,14 @@ public class MathBindings {
     /**
      * Binding for {@link java.lang.Math#decrementExact(int)}
      */
-    public static IntegerBinding decrementExact(final ObservableIntegerValue x) {
+    public static IntegerBinding decrementExact(final ObservableIntegerValue a) {
         return null;
     }
 
     /**
      * Binding for {@link java.lang.Math#decrementExact(long)}
      */
-    public static LongBinding decrementExact(final ObservableLongValue x) {
+    public static LongBinding decrementExact(final ObservableLongValue a) {
         return null;
     }
 
