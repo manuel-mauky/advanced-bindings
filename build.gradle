@@ -1,12 +1,12 @@
 apply plugin: "java"
+apply plugin: 'sonar-runner'
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = "eu.lestard"
 version = "0.1.0"
-
-
 
 repositories {
     mavenCentral()
@@ -16,10 +16,24 @@ repositories {
 }
 
 
+
 dependencies {
 
     // testing
     testCompile "eu.lestard:assertj-javafx:0.1.2-SNAPSHOT"
     testCompile "org.assertj:assertj-core:1.6.0"
     testCompile "junit:junit:4.11"
+}
+
+
+jacoco {
+    toolVersion = "0.7.0.201403182114"
+}
+
+sonarRunner {
+    sonarProperties {
+        properties["sonar.libraries"] += System.env.'JAVA_HOME' + "/jre/lib/ext/jfxrt.jar"
+        property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/test.exec"
+        property 'sonar.junit.reportsPath', "${buildDir}/test-results"
+    }
 }
