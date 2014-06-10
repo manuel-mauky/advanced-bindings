@@ -1,13 +1,7 @@
 package eu.lestard.advanced_bindings.api;
 
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.FloatBinding;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.LongBinding;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableFloatValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.ObservableLongValue;
+import javafx.beans.binding.*;
+import javafx.beans.value.*;
 
 import static javafx.beans.binding.Bindings.*;
 
@@ -46,20 +40,20 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#addExact(int, int)}
      */
     public static IntegerBinding addExact(final ObservableIntegerValue x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.addExact(x.get(), y.get()), x, y);
     }
 
     /**
      * Binding for {@link java.lang.Math#addExact(int, int)}
      */
     public static IntegerBinding addExact(final int x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.addExact(x, y.get()), y);
     }
     /**
      * Binding for {@link java.lang.Math#addExact(int, int)}
      */
     public static IntegerBinding addExact(final ObservableIntegerValue x, final int y){
-        return null;
+        return createIntegerBinding(()->Math.addExact(x.get(), y), x);
     }
 
 
@@ -67,19 +61,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#addExact(long, long)}
      */
     public static LongBinding addExact(final ObservableLongValue x, final ObservableLongValue y){
-        return null;
+        return createLongBinding(()->Math.addExact(x.get(), y.get()),x,y);
     }
     /**
      * Binding for {@link java.lang.Math#addExact(long, long)}
      */
     public static LongBinding addExact(final long x, final ObservableLongValue y){
-        return null;
+        return createLongBinding(()->Math.addExact(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#addExact(long, long)}
      */
     public static LongBinding addExact(final ObservableLongValue x, final long y){
-        return null;
+        return createLongBinding(()->Math.addExact(x.get(), y),x);
     }
 
     /**
@@ -232,19 +226,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#floorDiv(int, int)}
      */
     public static IntegerBinding floorDiv(final ObservableIntegerValue x, final ObservableIntegerValue y) {
-        return null;
+        return createIntegerBinding(()->Math.floorDiv(x.get(), y.get()),x,y);
     }
     /**
      * Binding for {@link java.lang.Math#floorDiv(int, int)}
      */
     public static IntegerBinding floorDiv(final int x, final ObservableIntegerValue y) {
-        return null;
+        return createIntegerBinding(()->Math.floorDiv(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#floorDiv(int, int)}
      */
     public static IntegerBinding floorDiv(final ObservableIntegerValue x, final int y) {
-        return null;
+        return createIntegerBinding(()->Math.floorDiv(x.get(), y),x);
     }
 
 
@@ -253,19 +247,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#floorDiv(long, long)}
      */
     public static LongBinding floorDiv(final ObservableLongValue x, final ObservableLongValue y) {
-        return null;
+        return createLongBinding(() -> Math.floorDiv(x.get(), y.get()), x, y);
     }
     /**
      * Binding for {@link java.lang.Math#floorDiv(long, long)}
      */
     public static LongBinding floorDiv(final long x, final ObservableLongValue y) {
-        return null;
+        return createLongBinding(()->Math.floorDiv(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#floorDiv(long, long)}
      */
     public static LongBinding floorDiv(final ObservableLongValue x, final long y) {
-        return null;
+        return createLongBinding(()->Math.floorDiv(x.get(), y),x);
     }
 
 
@@ -274,19 +268,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#floorMod(int, int)}
      */
     public static IntegerBinding floorMod(final ObservableIntegerValue x, final ObservableIntegerValue y) {
-        return null;
+        return createIntegerBinding(()->Math.floorMod(x.get(), y.get()),x,y);
     }
     /**
      * Binding for {@link java.lang.Math#floorMod(int, int)}
      */
     public static IntegerBinding floorMod(final int x, final ObservableIntegerValue y) {
-        return null;
+        return createIntegerBinding(()->Math.floorMod(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#floorMod(int, int)}
      */
     public static IntegerBinding floorMod(final ObservableIntegerValue x, final int y) {
-        return null;
+        return createIntegerBinding(()->Math.floorMod(x.get(), y),x);
     }
 
 
@@ -295,19 +289,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#floorMod(long, long)}
      */
     public static LongBinding floorMod(final ObservableLongValue x, final ObservableLongValue y) {
-        return null;
+        return createLongBinding(() -> Math.floorMod(x.get(), y.get()), x, y);
     }
     /**
      * Binding for {@link java.lang.Math#floorMod(long, long)}
      */
     public static LongBinding floorMod(final long x, final ObservableLongValue y) {
-        return null;
+        return  createLongBinding(()->Math.floorMod(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#floorMod(long, long)}
      */
     public static LongBinding floorMod(final ObservableLongValue x, final long y) {
-        return null;
+        return  createLongBinding(()->Math.floorMod(x.get(), y),x);
     }
 
     /**
@@ -450,38 +444,38 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#max(int, int)}
      */
     public static IntegerBinding max(final ObservableIntegerValue a, final ObservableIntegerValue b){
-        return null;
+        return createIntegerBinding(()->Math.max(a.get(), b.get()),a, b);
     }
     /**
      * Binding for {@link java.lang.Math#max(int, int)}
      */
     public static IntegerBinding max(final int a, final ObservableIntegerValue b){
-        return null;
+        return createIntegerBinding(()->Math.max(a, b.get()), b);
     }
     /**
      * Binding for {@link java.lang.Math#max(int, int)}
      */
     public static IntegerBinding max(final ObservableIntegerValue a, final int b){
-        return null;
+        return createIntegerBinding(()->Math.max(a.get(), b),a);
     }
 
     /**
      * Binding for {@link java.lang.Math#max(long, long)}
      */
     public static LongBinding max(final ObservableLongValue a, final ObservableLongValue b){
-        return null;
+        return createLongBinding(() -> Math.max(a.get(), b.get()), a, b);
     }
     /**
      * Binding for {@link java.lang.Math#max(long, long)}
      */
     public static LongBinding max(final long a, final ObservableLongValue b){
-        return null;
+        return createLongBinding(()->Math.max(a, b.get()), b);
     }
     /**
      * Binding for {@link java.lang.Math#max(long, long)}
      */
     public static LongBinding max(final ObservableLongValue a, final long b){
-        return null;
+        return createLongBinding(()->Math.max(a.get(), b),a);
     }
 
 
@@ -530,38 +524,38 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#min(int, int)}
      */
     public static IntegerBinding min(final ObservableIntegerValue a, final ObservableIntegerValue b){
-        return null;
+        return createIntegerBinding(()->Math.min(a.get(), b.get()),a,b);
     }
     /**
      * Binding for {@link java.lang.Math#min(int, int)}
      */
     public static IntegerBinding min(final int a, final ObservableIntegerValue b){
-        return null;
+        return createIntegerBinding(()->Math.min(a, b.get()),b);
     }
     /**
      * Binding for {@link java.lang.Math#min(int, int)}
      */
     public static IntegerBinding min(final ObservableIntegerValue a, final int b){
-        return null;
+        return createIntegerBinding(()->Math.min(a.get(), b),a);
     }
 
     /**
      * Binding for {@link java.lang.Math#min(long, long)}
      */
     public static LongBinding min(final ObservableLongValue a, final ObservableLongValue b){
-        return null;
+        return createLongBinding(() -> Math.min(a.get(), b.get()), a, b);
     }
     /**
      * Binding for {@link java.lang.Math#min(long, long)}
      */
     public static LongBinding min(final long a, final ObservableLongValue b){
-        return null;
+        return createLongBinding(()->Math.min(a, b.get()),b);
     }
     /**
      * Binding for {@link java.lang.Math#min(long, long)}
      */
     public static LongBinding min(final ObservableLongValue a, final long b){
-        return null;
+        return createLongBinding(()->Math.min(a.get(), b),a);
     }
 
 
@@ -570,19 +564,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#multiplyExact(int, int)}
      */
     public static IntegerBinding multiplyExact(final ObservableIntegerValue x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.multiplyExact(x.get(),y.get()),x,y);
     }
     /**
      * Binding for {@link java.lang.Math#multiplyExact(int, int)}
      */
     public static IntegerBinding multiplyExact(final int x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.multiplyExact(x,y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#multiplyExact(int, int)}
      */
     public static IntegerBinding multiplyExact(final ObservableIntegerValue x, final int y){
-        return null;
+        return createIntegerBinding(()->Math.multiplyExact(x.get(),y),x);
     }
 
 
@@ -590,19 +584,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#multiplyExact(long, long)}
      */
     public static LongBinding multiplyExact(final ObservableLongValue x, final ObservableLongValue y){
-        return null;
+        return  createLongBinding(() -> Math.multiplyExact(x.get(), y.get()), x, y);
     }
     /**
      * Binding for {@link java.lang.Math#multiplyExact(long, long)}
      */
     public static LongBinding multiplyExact(final long x, final ObservableLongValue y){
-        return null;
+        return  createLongBinding(()->Math.multiplyExact(x,y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#multiplyExact(long, long)}
      */
     public static LongBinding multiplyExact(final ObservableLongValue x, final long y){
-        return null;
+        return  createLongBinding(()->Math.multiplyExact(x.get(),y),x);
     }
 
     /**
@@ -813,19 +807,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#subtractExact(int, int)}
      */
     public static IntegerBinding subtractExact(final ObservableIntegerValue x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.subtractExact(x.get(), y.get()),x,y);
     }
     /**
      * Binding for {@link java.lang.Math#subtractExact(int, int)}
      */
     public static IntegerBinding subtractExact(final int x, final ObservableIntegerValue y){
-        return null;
+        return createIntegerBinding(()->Math.subtractExact(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#subtractExact(int, int)}
      */
     public static IntegerBinding subtractExact(final ObservableIntegerValue x, final int y){
-        return null;
+        return createIntegerBinding(()->Math.subtractExact(x.get(), y),x);
     }
 
 
@@ -833,19 +827,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#subtractExact(long, long)}
      */
     public static LongBinding subtractExact(final ObservableLongValue x, final ObservableLongValue y){
-        return null;
+        return createLongBinding(() -> Math.subtractExact(x.get(), y.get()), x, y);
     }
     /**
      * Binding for {@link java.lang.Math#subtractExact(long, long)}
      */
     public static LongBinding subtractExact(final long x, final ObservableLongValue y){
-        return null;
+        return  createLongBinding(()->Math.subtractExact(x, y.get()),y);
     }
     /**
      * Binding for {@link java.lang.Math#subtractExact(long, long)}
      */
     public static LongBinding subtractExact(final ObservableLongValue x, final long y){
-        return null;
+        return  createLongBinding(()->Math.subtractExact(x.get(), y),x);
     }
 
 

@@ -1,19 +1,8 @@
 package eu.lestard.advanced_bindings.api;
 
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.FloatBinding;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.LongBinding;
-import javafx.beans.property.*;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableFloatValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.ObservableLongValue;
 import org.junit.Test;
 
-import java.util.function.Function;
-
-import static eu.lestard.assertj.javafx.api.Assertions.*;
+import static eu.lestard.advanced_bindings.api.MathBindingsTestHelper.*;
 
 
 /**
@@ -34,6 +23,18 @@ public class MathBindingsTest {
         testFloatBinding(MathBindings::abs, Math::abs, 10.13f, -23.4f);
         testIntegerBinding(MathBindings::abs, Math::abs, 20, -13);
         testLongBinding(MathBindings::abs, Math::abs, 20l, -13l);
+    }
+
+    @Test
+    public void testAddExact(){
+        testIntegerBinding2Args1(MathBindings::addExact, Math::addExact, new Args<>(12, 4), new Args<>(0, 1), new Args<>(-123, 234));
+        testIntegerBinding2Args2(MathBindings::addExact, Math::addExact, new Args<>(12, 4), new Args<>(0, 1), new Args<>(-123, 234));
+        testIntegerBinding2Args3(MathBindings::addExact, Math::addExact, new Args<>(12, 4), new Args<>(0, 1), new Args<>(-123, 234));
+
+        testLongBinding2Args1(MathBindings::addExact, Math::addExact, new Args<>(12l, 4l), new Args<>(0l, 1l), new Args<>(-123l, 234l));
+        testLongBinding2Args2(MathBindings::addExact, Math::addExact, new Args<>(12l, 4l), new Args<>(0l, 1l), new Args<>(-123l, 234l));
+        testLongBinding2Args3(MathBindings::addExact, Math::addExact, new Args<>(12l, 4l), new Args<>(0l, 1l), new Args<>(-123l, 234l));
+
     }
 
     @Test
@@ -95,6 +96,29 @@ public class MathBindingsTest {
 
 
     @Test
+    public void testFloorDiv(){
+        testIntegerBinding2Args1(MathBindings::floorDiv, Math::floorDiv, new Args<>(4, 3), new Args<>(-4, 3));
+        testIntegerBinding2Args2(MathBindings::floorDiv, Math::floorDiv, new Args<>(4, 3), new Args<>(-4, 3));
+        testIntegerBinding2Args3(MathBindings::floorDiv, Math::floorDiv, new Args<>(4, 3), new Args<>(-4, 3));
+
+        testLongBinding2Args1(MathBindings::floorDiv, Math::floorDiv, new Args<>(4l, 3l), new Args<>(-4l, 3l));
+        testLongBinding2Args2(MathBindings::floorDiv, Math::floorDiv, new Args<>(4l, 3l), new Args<>(-4l, 3l));
+        testLongBinding2Args3(MathBindings::floorDiv, Math::floorDiv, new Args<>(4l, 3l), new Args<>(-4l, 3l));
+    }
+
+    @Test
+    public void testFloorMod(){
+        testIntegerBinding2Args1(MathBindings::floorMod, Math::floorMod, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, -3));
+        testIntegerBinding2Args2(MathBindings::floorMod, Math::floorMod, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, -3));
+        testIntegerBinding2Args3(MathBindings::floorMod, Math::floorMod, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, -3));
+
+        testLongBinding2Args1(MathBindings::floorMod, Math::floorMod, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, -3l));
+        testLongBinding2Args2(MathBindings::floorMod, Math::floorMod, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, -3l));
+        testLongBinding2Args3(MathBindings::floorMod, Math::floorMod, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, -3l));
+    }
+
+
+    @Test
     public void testIncrementExact(){
         testIntegerBinding(MathBindings::incrementExact, Math::incrementExact, -10, -1, 0, 1, 10);
         testLongBinding(MathBindings::incrementExact, Math::incrementExact, -10l, -1l, 0l, 1l, 10l);
@@ -114,6 +138,42 @@ public class MathBindingsTest {
     public void testLog1p(){
         testDoubleBinding(MathBindings::log1p, Math::log1p, -12.3, -1, 0, 1, 12.3, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY );
     }
+
+
+    @Test
+    public void testMax(){
+        testIntegerBinding2Args1(MathBindings::max, Math::max, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+        testIntegerBinding2Args2(MathBindings::max, Math::max, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+        testIntegerBinding2Args3(MathBindings::max, Math::max, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+
+        testLongBinding2Args1(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+        testLongBinding2Args2(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+        testLongBinding2Args3(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+    }
+
+    @Test
+    public void testMin(){
+        testIntegerBinding2Args1(MathBindings::min, Math::min, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+        testIntegerBinding2Args2(MathBindings::min, Math::min, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+        testIntegerBinding2Args3(MathBindings::min, Math::min, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(4, 4));
+
+        testLongBinding2Args1(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+        testLongBinding2Args2(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+        testLongBinding2Args3(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+    }
+
+
+    @Test
+    public void testMultiplyExact(){
+        testIntegerBinding2Args1(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+        testIntegerBinding2Args2(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+        testIntegerBinding2Args3(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+
+        testLongBinding2Args1(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+        testLongBinding2Args2(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+        testLongBinding2Args3(MathBindings::multiplyExact, Math::multiplyExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+    }
+
 
     @Test
     public void testNegateExact(){
@@ -161,6 +221,17 @@ public class MathBindingsTest {
     }
 
     @Test
+    public void testSubtractExact(){
+        testIntegerBinding2Args1(MathBindings::subtractExact, Math::subtractExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+        testIntegerBinding2Args2(MathBindings::subtractExact, Math::subtractExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+        testIntegerBinding2Args3(MathBindings::subtractExact, Math::subtractExact, new Args<>(4, 3), new Args<>(-4, 3), new Args<>(0, 4));
+
+        testLongBinding2Args1(MathBindings::subtractExact, Math::subtractExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+        testLongBinding2Args2(MathBindings::subtractExact, Math::subtractExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+        testLongBinding2Args3(MathBindings::subtractExact, Math::subtractExact, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(0l, 4l));
+    }
+
+    @Test
     public void testTan(){
         testDoubleBinding(MathBindings::tan, Math::tan, -1, 0, 1, Math.PI, -Math.PI, Double.NaN );
     }
@@ -184,98 +255,6 @@ public class MathBindingsTest {
     public void testUlp(){
         testDoubleBinding(MathBindings::ulp, Math::ulp, 0, 1, 102.3, -102.3, Double.MAX_VALUE, Double.MIN_VALUE, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
         testFloatBinding(MathBindings::ulp, Math::ulp, 0f, 1f, 102.3f, -102.3f, Float.MAX_VALUE, Float.MIN_VALUE, Float.NaN, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY);
-    }
-
-
-
-    /**
-     * Helper for math methods that take <b>one</b> param of type <code>Long</code> and returns a <code>Long</code>.
-     *
-     * @param bindingFunction a method reference to a binding factory method from {@link
-     *                        eu.lestard.advanced_bindings.api.MathBindings}.
-     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
-     * @param args            example arguments that are used to verify.
-     */
-    private void testLongBinding(Function<ObservableLongValue, LongBinding> bindingFunction, Function<Long, Long> mathFunction, long... args) {
-        LongProperty base = new SimpleLongProperty();
-        final LongBinding binding = bindingFunction.apply(base);
-
-        for (long arg : args) {
-            base.set(arg);
-
-            long expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
-    }
-
-    /**
-     * Helper for math methods that take <b>one</b> param of type <code>Integer</code> and returns an <code>Integer</code>.
-     *
-     * @param bindingFunction a method reference to a binding factory method from {@link
-     *                        eu.lestard.advanced_bindings.api.MathBindings}.
-     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
-     * @param args            example arguments that are used to verify.
-     */
-    private void testIntegerBinding(Function<ObservableIntegerValue, IntegerBinding> bindingFunction, Function<Integer, Integer> mathFunction, int... args) {
-        IntegerProperty base = new SimpleIntegerProperty();
-        final IntegerBinding binding = bindingFunction.apply(base);
-
-        for (int arg : args) {
-            base.set(arg);
-
-            int expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
-    }
-
-    /**
-     * Helper for math methods that take <b>one</b> param of type <code>Double</code> and returns a <code>Double</code>.
-     *
-     * @param bindingFunction a method reference to a binding factory method from {@link
-     *                        eu.lestard.advanced_bindings.api.MathBindings}.
-     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
-     * @param args            example arguments that are used to verify.
-     */
-    private void testDoubleBinding(Function<ObservableDoubleValue, DoubleBinding> bindingFunction, Function<Double, Double> mathFunction, double... args) {
-
-        DoubleProperty base = new SimpleDoubleProperty();
-
-        final DoubleBinding binding = bindingFunction.apply(base);
-
-        for (double arg : args) {
-
-            base.set(arg);
-
-            double expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
-    }
-
-    /**
-     * Helper for math methods that take <b>one</b> param of type <code>Float</code> and returns a <code>Float</code>.
-     *
-     * @param bindingFunction a method reference to a binding factory method from {@link
-     *                        eu.lestard.advanced_bindings.api.MathBindings}.
-     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
-     * @param args            example arguments that are used to verify.
-     */
-    private void testFloatBinding(Function<ObservableFloatValue, FloatBinding> bindingFunction, Function<Float, Float> mathFunction, float... args) {
-
-        FloatProperty base = new SimpleFloatProperty();
-
-        final FloatBinding binding = bindingFunction.apply(base);
-
-        for (float arg : args) {
-
-            base.set(arg);
-
-            float expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
     }
 
 }
