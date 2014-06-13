@@ -265,6 +265,161 @@ public class MathBindingsTestHelper {
         }
     }
 
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     *
+     * This method is used for bindings where <b>both</b> args are observables.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testFloatBinding2Args1(BiFunction<ObservableFloatValue, ObservableFloatValue, FloatBinding> bindingFunction, BiFunction<Float, Float, Float> mathFunction, Args<Float>...args){
+
+        FloatProperty first = new SimpleFloatProperty();
+        FloatProperty second = new SimpleFloatProperty();
+
+        FloatBinding binding = bindingFunction.apply(first,second);
+
+
+        for(Args<Float> arg : args){
+            first.set(arg.getFirst());
+            second.set(arg.getSecond());
+
+            float expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     *
+     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testFloatBinding2Args2(BiFunction<Float, ObservableFloatValue, FloatBinding> bindingFunction, BiFunction<Float, Float, Float> mathFunction, Args<Float>...args){
+        for(Args<Float> arg : args){
+            FloatProperty second = new SimpleFloatProperty();
+            FloatBinding binding = bindingFunction.apply(arg.getFirst(),second);
+
+            second.set(arg.getSecond());
+
+            float expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     *
+     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testFloatBinding2Args3(BiFunction<ObservableFloatValue, Float, FloatBinding> bindingFunction, BiFunction<Float,Float,Float> mathFunction, Args<Float>...args){
+        for(Args<Float> arg : args){
+            FloatProperty first = new SimpleFloatProperty();
+            FloatBinding binding = bindingFunction.apply(first, arg.getSecond());
+
+            first.set(arg.getFirst());
+
+            float expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a <code>Double</code>.
+     *
+     * This method is used for bindings where <b>both</b> args are observables.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testDoubleBinding2Args1(BiFunction<ObservableDoubleValue, ObservableDoubleValue, DoubleBinding> bindingFunction, BiFunction<Double, Double, Double> mathFunction, Args<Double>...args){
+
+        DoubleProperty first = new SimpleDoubleProperty();
+        DoubleProperty second = new SimpleDoubleProperty();
+
+        DoubleBinding binding = bindingFunction.apply(first,second);
+
+
+        for(Args<Double> arg : args){
+            first.set(arg.getFirst());
+            second.set(arg.getSecond());
+
+            double expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a <code>Double</code>.
+     *
+     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testDoubleBinding2Args2(BiFunction<Double, ObservableDoubleValue, DoubleBinding> bindingFunction, BiFunction<Double,Double,Double> mathFunction, Args<Double>...args){
+        for(Args<Double> arg : args){
+            DoubleProperty second = new SimpleDoubleProperty();
+            DoubleBinding binding = bindingFunction.apply(arg.getFirst(),second);
+
+            second.set(arg.getSecond());
+
+            double expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+    /**
+     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a <code>Double</code>.
+     *
+     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     *
+     * @param bindingFunction a method reference to a binding factory method from {@link
+     *                        eu.lestard.advanced_bindings.api.MathBindings}.
+     * @param mathFunction    a method reference to the corresponding method of {@link java.lang.Math}.
+     * @param args            example arguments that are used to verify.
+     */
+    @SafeVarargs
+    static void testDoubleBinding2Args3(BiFunction<ObservableDoubleValue, Double, DoubleBinding> bindingFunction, BiFunction<Double,Double,Double> mathFunction, Args<Double>...args){
+        for(Args<Double> arg : args){
+            DoubleProperty first = new SimpleDoubleProperty();
+            DoubleBinding binding = bindingFunction.apply(first, arg.getSecond());
+
+            first.set(arg.getFirst());
+
+            double expectedResult = mathFunction.apply(arg.getFirst(), arg.getSecond());
+
+            assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
 
     /**
      * Helper class that represents an combination of two args. It is used for tests of bindings with 2 args.
