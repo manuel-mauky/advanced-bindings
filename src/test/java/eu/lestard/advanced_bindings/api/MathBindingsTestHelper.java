@@ -19,7 +19,8 @@ public class MathBindingsTestHelper {
 
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Long</code> and returns a <code>Long</code>.
+     * Helper for math methods that take <b>one</b> param of type <code>Long</code> and returns a value of generic type
+     * <code>R</code>.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -28,7 +29,7 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testLongBinding(Function<ObservableLongValue, Binding<R>> bindingFunction, Function<Long, R> mathFunction, long... args) {
+    static <R extends Number> void testLongArgBinding(Function<ObservableLongValue, Binding<R>> bindingFunction, Function<Long, R> mathFunction, long... args) {
         LongProperty base = new SimpleLongProperty();
         final Binding<R> binding = bindingFunction.apply(base);
 
@@ -42,8 +43,8 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Integer</code> and returns an
-     * <code>Integer</code>.
+     * Helper for math methods that take <b>one</b> param of type <code>Integer</code> and returns a
+     * value of generic type <code>R</code>.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -52,7 +53,7 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testIntegerBinding(Function<ObservableIntegerValue, Binding<R>> bindingFunction, Function<Integer, R> mathFunction, int... args) {
+    static <R extends Number> void testIntegerArgBinding(Function<ObservableIntegerValue, Binding<R>> bindingFunction, Function<Integer, R> mathFunction, int... args) {
         IntegerProperty base = new SimpleIntegerProperty();
         final Binding<R> binding = bindingFunction.apply(base);
 
@@ -67,7 +68,7 @@ public class MathBindingsTestHelper {
 
     /**
      * Helper for math methods that take <b>one</b> param of type <code>Double</code> and returns a
-     * <code>Double</code>.
+     * value of generic type <code>R</code>.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -76,7 +77,7 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testDoubleBinding(Function<ObservableDoubleValue, Binding<R>> bindingFunction, Function<Double, R> mathFunction, double... args) {
+    static <R extends Number> void testDoubleArgBinding(Function<ObservableDoubleValue, Binding<R>> bindingFunction, Function<Double, R> mathFunction, double... args) {
 
         DoubleProperty base = new SimpleDoubleProperty();
 
@@ -93,7 +94,8 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     * Helper for math methods that take <b>one</b> param of type <code>Float</code> and returns a  value of generic
+     * type <code>R</code>.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -102,7 +104,7 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testFloatBinding(Function<ObservableFloatValue, Binding<R>> bindingFunction, Function<Float, R> mathFunction, float... args) {
+    static <R extends Number> void testFloatArgBinding(Function<ObservableFloatValue, Binding<R>> bindingFunction, Function<Float, R> mathFunction, float... args) {
 
         FloatProperty base = new SimpleFloatProperty();
 
