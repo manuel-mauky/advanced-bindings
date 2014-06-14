@@ -137,19 +137,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#copySign(double, double)}
      */
     public static DoubleBinding copySign(final ObservableDoubleValue magnitude, ObservableDoubleValue sign) {
-        return null;
+        return createDoubleBinding(()->Math.copySign(magnitude.get(), sign.get()), magnitude, sign);
     }
     /**
      * Binding for {@link java.lang.Math#copySign(double, double)}
      */
     public static DoubleBinding copySign(final double magnitude, ObservableDoubleValue sign) {
-        return null;
+        return createDoubleBinding(()->Math.copySign(magnitude, sign.get()), sign);
     }
     /**
      * Binding for {@link java.lang.Math#copySign(double, double)}
      */
     public static DoubleBinding copySign(final ObservableDoubleValue magnitude, double sign) {
-        return null;
+        return createDoubleBinding(()->Math.copySign(magnitude.get(), sign), magnitude);
     }
 
 
@@ -157,19 +157,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#copySign(float, float)}
      */
     public static FloatBinding copySign(final ObservableFloatValue magnitude, ObservableFloatValue sign) {
-        return null;
+        return createFloatBinding(() -> Math.copySign(magnitude.get(), sign.get()), magnitude, sign);
     }
     /**
      * Binding for {@link java.lang.Math#copySign(float, float)}
      */
     public static FloatBinding copySign(final float magnitude, ObservableFloatValue sign) {
-        return null;
+        return createFloatBinding(()->Math.copySign(magnitude, sign.get()), sign);
     }
     /**
      * Binding for {@link java.lang.Math#copySign(float, float)}
      */
     public static FloatBinding copySign(final ObservableFloatValue magnitude, float sign) {
-        return null;
+        return createFloatBinding(()->Math.copySign(magnitude.get(), sign), magnitude);
     }
 
     /**
@@ -324,21 +324,21 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#hypot(double, double)}
      */
     public static DoubleBinding hypot(final ObservableDoubleValue x, final ObservableDoubleValue y) {
-        return null;
+        return createDoubleBinding(()->Math.hypot(x.get(), y.get()),x ,y);
     }
 
     /**
      * Binding for {@link java.lang.Math#hypot(double, double)}
      */
     public static DoubleBinding hypot(final double x, final ObservableDoubleValue y) {
-        return null;
+        return createDoubleBinding(()->Math.hypot(x, y.get()),y);
     }
 
     /**
      * Binding for {@link java.lang.Math#hypot(double, double)}
      */
     public static DoubleBinding hypot(final ObservableDoubleValue x, final double y) {
-        return null;
+        return createDoubleBinding(()->Math.hypot(x.get(), y),x);
     }
 
 
@@ -346,21 +346,21 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#IEEEremainder(double, double)}
      */
     public static DoubleBinding IEEEremainder(final ObservableDoubleValue f1, final ObservableDoubleValue f2) {
-        return null;
+        return createDoubleBinding(()->Math.IEEEremainder(f1.get(), f2.get()),f1, f2);
     }
 
     /**
      * Binding for {@link java.lang.Math#IEEEremainder(double, double)}
      */
     public static DoubleBinding IEEEremainder(final double f1, final ObservableDoubleValue f2) {
-        return null;
+        return createDoubleBinding(()->Math.IEEEremainder(f1, f2.get()), f2);
     }
 
     /**
      * Binding for {@link java.lang.Math#IEEEremainder(double, double)}
      */
     public static DoubleBinding IEEEremainder(final ObservableDoubleValue f1, final double f2) {
-        return null;
+        return  createDoubleBinding(()->Math.IEEEremainder(f1.get(), f2),f1);
     }
 
 
@@ -404,19 +404,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#max(double, double)}
      */
     public static DoubleBinding max(final ObservableDoubleValue a, final ObservableDoubleValue b) {
-        return null;
+        return createDoubleBinding(()->Math.max(a.get(), b.get()), a, b);
     }
     /**
      * Binding for {@link java.lang.Math#max(double, double)}
      */
     public static DoubleBinding max(final double a, final ObservableDoubleValue b){
-        return null;
+        return createDoubleBinding(()->Math.max(a, b.get()), b);
     }
     /**
      * Binding for {@link java.lang.Math#max(double, double)}
      */
     public static DoubleBinding max(final ObservableDoubleValue a, final double b){
-        return null;
+        return createDoubleBinding(()->Math.max(a.get(), b), a);
     }
 
 
@@ -424,19 +424,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#max(float, float)}
      */
     public static FloatBinding max(final ObservableFloatValue a, final ObservableFloatValue b){
-        return null;
+        return createFloatBinding(() -> Math.max(a.get(), b.get()), a, b);
     }
     /**
      * Binding for {@link java.lang.Math#max(float, float)}
      */
     public static FloatBinding max(final float a, final ObservableFloatValue b){
-        return null;
+        return createFloatBinding(() -> Math.max(a, b.get()), b);
     }
     /**
      * Binding for {@link java.lang.Math#max(float, float)}
      */
     public static FloatBinding max(final ObservableFloatValue a, final float b){
-        return null;
+        return createFloatBinding(() -> Math.max(a.get(), b), a);
     }
 
 
@@ -484,19 +484,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#min(double, double)}
      */
     public static DoubleBinding min(final ObservableDoubleValue a, final ObservableDoubleValue b) {
-        return null;
+        return createDoubleBinding(()->Math.min(a.get(), b.get()),a,b);
     }
     /**
      * Binding for {@link java.lang.Math#min(double, double)}
      */
     public static DoubleBinding min(final double a, final ObservableDoubleValue b){
-        return null;
+        return createDoubleBinding(()->Math.min(a, b.get()),b);
     }
     /**
      * Binding for {@link java.lang.Math#min(double, double)}
      */
     public static DoubleBinding min(final ObservableDoubleValue a, final double b){
-        return null;
+        return createDoubleBinding(()->Math.min(a.get(), b),a);
     }
 
 
@@ -504,19 +504,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#min(float, float)}
      */
     public static FloatBinding min(final ObservableFloatValue a, final ObservableFloatValue b){
-        return null;
+        return createFloatBinding(() -> Math.min(a.get(), b.get()), a, b);
     }
     /**
      * Binding for {@link java.lang.Math#min(float, float)}
      */
     public static FloatBinding min(final float a, final ObservableFloatValue b){
-        return null;
+        return  createFloatBinding(()->Math.min(a, b.get()),b);
     }
     /**
      * Binding for {@link java.lang.Math#min(float, float)}
      */
     public static FloatBinding min(final ObservableFloatValue a, final float b){
-        return null;
+        return  createFloatBinding(()->Math.min(a.get(), b),a);
     }
 
 
@@ -618,19 +618,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#nextAfter(double, double)}
      */
     public static DoubleBinding nextAfter(final ObservableDoubleValue start, final ObservableDoubleValue direction) {
-        return null;
+        return createDoubleBinding(()->Math.nextAfter(start.get(), direction.get()), start, direction);
     }
     /**
      * Binding for {@link java.lang.Math#nextAfter(double, double)}
      */
     public static DoubleBinding nextAfter(final double start, final ObservableDoubleValue direction){
-        return null;
+        return createDoubleBinding(()->Math.nextAfter(start, direction.get()), direction);
     }
     /**
      * Binding for {@link java.lang.Math#nextAfter(double, double)}
      */
     public static DoubleBinding nextAfter(final ObservableDoubleValue start, final double direction){
-        return null;
+        return createDoubleBinding(()->Math.nextAfter(start.get(), direction), start);
     }
 
 
@@ -638,19 +638,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#nextAfter(float, double)}
      */
     public static FloatBinding nextAfter(final ObservableFloatValue start, final ObservableFloatValue direction){
-        return null;
+        return createFloatBinding(()->Math.nextAfter(start.get(), direction.get()), start, direction);
     }
     /**
      * Binding for {@link java.lang.Math#nextAfter(float, double)}
      */
     public static FloatBinding nextAfter(final float start, final ObservableFloatValue direction){
-        return null;
+        return createFloatBinding(()->Math.nextAfter(start, direction.get()),  direction);
     }
     /**
      * Binding for {@link java.lang.Math#nextAfter(float, double)}
      */
     public static FloatBinding nextAfter(final ObservableFloatValue start, final float direction){
-        return null;
+        return createFloatBinding(()->Math.nextAfter(start.get(), direction), start);
     }
 
 
@@ -685,19 +685,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#pow(double, double)}
      */
     public static DoubleBinding pow(final ObservableDoubleValue a, final ObservableDoubleValue b){
-        return null;
+        return createDoubleBinding(()->Math.pow(a.get(), b.get()),a, b);
     }
     /**
      * Binding for {@link java.lang.Math#pow(double, double)}
      */
     public static DoubleBinding pow(final double a, final ObservableDoubleValue b){
-        return null;
+        return createDoubleBinding(()->Math.pow(a, b.get()),b);
     }
     /**
      * Binding for {@link java.lang.Math#pow(double, double)}
      */
     public static DoubleBinding pow(final ObservableDoubleValue a, final double b){
-        return null;
+        return createDoubleBinding(()->Math.pow(a.get(), b),a);
     }
 
     /**

@@ -64,6 +64,18 @@ public class MathBindingsTest {
     }
 
     @Test
+    public void testCopySign(){
+        testDoubleBinding2Args1(MathBindings::copySign, Math::copySign, new Args<>(-12.3, 123.2), new Args<>(12.3, -123.2), new Args<>(Double.NaN, 123.2));
+        testDoubleBinding2Args2(MathBindings::copySign, Math::copySign, new Args<>(-12.3, 123.2), new Args<>(12.3, -123.2), new Args<>(Double.NaN, 123.2));
+        testDoubleBinding2Args3(MathBindings::copySign, Math::copySign, new Args<>(-12.3, 123.2), new Args<>(12.3, -123.2), new Args<>(Double.NaN, 123.2));
+
+        testFloatBinding2Args1(MathBindings::copySign, Math::copySign, new Args<>(-12.3f, 123.2f), new Args<>(12.3f, -123.2f), new Args<>(Float.NaN, 123.2f));
+        testFloatBinding2Args2(MathBindings::copySign, Math::copySign, new Args<>(-12.3f, 123.2f), new Args<>(12.3f, -123.2f), new Args<>(Float.NaN, 123.2f));
+        testFloatBinding2Args3(MathBindings::copySign, Math::copySign, new Args<>(-12.3f, 123.2f), new Args<>(12.3f, -123.2f), new Args<>(Float.NaN, 123.2f));
+    }
+
+
+    @Test
     public void testCos(){
         testDoubleBinding(MathBindings::cos, Math::cos, 0, 1, -1, Math.PI, -Math.PI, Double.NaN);
     }
@@ -119,6 +131,51 @@ public class MathBindingsTest {
 
 
     @Test
+    public void testHypot(){
+        testDoubleBinding2Args1(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
+        testDoubleBinding2Args2(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
+        testDoubleBinding2Args2(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
+    }
+
+    @Test
+    public void testIEEEremainder(){
+        testDoubleBinding2Args1(MathBindings::IEEEremainder, Math::IEEEremainder,
+            new Args<>(1.2, 0.2),
+            new Args<>(Double.POSITIVE_INFINITY, 12.2),
+            new Args<>(Double.NEGATIVE_INFINITY, 1.2),
+            new Args<>(1.2, Double.POSITIVE_INFINITY),
+            new Args<>(1.2, Double.NEGATIVE_INFINITY),
+            new Args<>(1.2, 0.0),
+            new Args<>(0.0, 1.2),
+            new Args<>(Double.NaN, 1.2),
+            new Args<>(1.2, Double.NaN));
+
+        testDoubleBinding2Args2(MathBindings::IEEEremainder, Math::IEEEremainder,
+            new Args<>(1.2, 0.2),
+            new Args<>(Double.POSITIVE_INFINITY, 12.2),
+            new Args<>(Double.NEGATIVE_INFINITY, 1.2),
+            new Args<>(1.2, Double.POSITIVE_INFINITY),
+            new Args<>(1.2, Double.NEGATIVE_INFINITY),
+            new Args<>(1.2, 0.0),
+            new Args<>(0.0, 1.2),
+            new Args<>(Double.NaN, 1.2),
+            new Args<>(1.2, Double.NaN));
+
+        testDoubleBinding2Args3(MathBindings::IEEEremainder, Math::IEEEremainder,
+            new Args<>(1.2, 0.2),
+            new Args<>(Double.POSITIVE_INFINITY, 12.2),
+            new Args<>(Double.NEGATIVE_INFINITY, 1.2),
+            new Args<>(1.2, Double.POSITIVE_INFINITY),
+            new Args<>(1.2, Double.NEGATIVE_INFINITY),
+            new Args<>(1.2, 0.0),
+            new Args<>(0.0, 1.2),
+            new Args<>(Double.NaN, 1.2),
+            new Args<>(1.2, Double.NaN));
+    }
+
+
+
+    @Test
     public void testIncrementExact(){
         testIntegerBinding(MathBindings::incrementExact, Math::incrementExact, -10, -1, 0, 1, 10);
         testLongBinding(MathBindings::incrementExact, Math::incrementExact, -10l, -1l, 0l, 1l, 10l);
@@ -149,6 +206,15 @@ public class MathBindingsTest {
         testLongBinding2Args1(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
         testLongBinding2Args2(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
         testLongBinding2Args3(MathBindings::max, Math::max, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+
+
+        testDoubleBinding2Args1(MathBindings::max, Math::max, new Args<>(4.3,3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+        testDoubleBinding2Args2(MathBindings::max, Math::max, new Args<>(4.3, 3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+        testDoubleBinding2Args3(MathBindings::max, Math::max, new Args<>(4.3, 3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+
+        testFloatBinding2Args1(MathBindings::max, Math::max, new Args<>(4.3f, 3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
+        testFloatBinding2Args2(MathBindings::max, Math::max, new Args<>(4.3f, 3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
+        testFloatBinding2Args3(MathBindings::max, Math::max, new Args<>(4.3f, 3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
     }
 
     @Test
@@ -160,6 +226,15 @@ public class MathBindingsTest {
         testLongBinding2Args1(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
         testLongBinding2Args2(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
         testLongBinding2Args3(MathBindings::min, Math::min, new Args<>(4l, 3l), new Args<>(-4l, 3l), new Args<>(4l, 4l));
+
+        testDoubleBinding2Args1(MathBindings::min, Math::min, new Args<>(4.3,3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+        testDoubleBinding2Args2(MathBindings::min, Math::min, new Args<>(4.3,3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+        testDoubleBinding2Args3(MathBindings::min, Math::min, new Args<>(4.3,3.1), new Args<>(-4.3, 3.1), new Args<>(4.3, 4.3));
+
+        testFloatBinding2Args1(MathBindings::min, Math::min, new Args<>(4.3f,3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
+        testFloatBinding2Args2(MathBindings::min, Math::min, new Args<>(4.3f,3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
+        testFloatBinding2Args3(MathBindings::min, Math::min, new Args<>(4.3f,3.1f), new Args<>(-4.3f, 3.1f), new Args<>(4.3f, 4.3f));
+
     }
 
 
@@ -182,6 +257,47 @@ public class MathBindingsTest {
     }
 
     @Test
+    public void testNextAfter(){
+        testDoubleBinding2Args1(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2, 0.3),
+            new Args<>(1.2, Double.NaN),
+            new Args<>(Double.MIN_VALUE, -0.3),
+            new Args<>(Double.NEGATIVE_INFINITY, -0.3),
+            new Args<>(-0.0, +0.0));
+        testDoubleBinding2Args2(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2, 0.3),
+            new Args<>(1.2, Double.NaN),
+            new Args<>(Double.MIN_VALUE, -0.3),
+            new Args<>(Double.NEGATIVE_INFINITY, -0.3),
+            new Args<>(-0.0, +0.0));
+        testDoubleBinding2Args3(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2, 0.3),
+            new Args<>(1.2, Double.NaN),
+            new Args<>(Double.MIN_VALUE, -0.3),
+            new Args<>(Double.NEGATIVE_INFINITY, -0.3),
+            new Args<>(-0.0, +0.0));
+
+        testFloatBinding2Args1(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2f, 0.3f),
+            new Args<>(1.2f, Float.NaN),
+            new Args<>(Float.MIN_VALUE, -0.3f),
+            new Args<>(Float.NEGATIVE_INFINITY, -0.3f),
+            new Args<>(-0.0f, +0.0f));
+        testFloatBinding2Args2(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2f, 0.3f),
+            new Args<>(1.2f, Float.NaN),
+            new Args<>(Float.MIN_VALUE, -0.3f),
+            new Args<>(Float.NEGATIVE_INFINITY, -0.3f),
+            new Args<>(-0.0f, +0.0f));
+        testFloatBinding2Args3(MathBindings::nextAfter, Math::nextAfter,
+            new Args<>(1.2f, 0.3f),
+            new Args<>(1.2f, Float.NaN),
+            new Args<>(Float.MIN_VALUE, -0.3f),
+            new Args<>(Float.NEGATIVE_INFINITY, -0.3f),
+            new Args<>(-0.0f, +0.0f));
+    }
+
+    @Test
     public void testNextDown(){
         testDoubleBinding(MathBindings::nextDown, Math::nextDown, -12.3, -1, 0, 1, 12.3, Double.NaN, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY );
         testFloatBinding(MathBindings::nextDown, Math::nextDown, -12.3f, -1f, 0f, 1f, 12.3f, Float.NaN, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY );
@@ -191,6 +307,37 @@ public class MathBindingsTest {
     public void testNextUp(){
         testDoubleBinding(MathBindings::nextUp, Math::nextUp, -12.3, -1, 0, 1, 12.3, Double.NaN, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY );
         testFloatBinding(MathBindings::nextUp, Math::nextUp, -12.3f, -1f, 0f, 1f, 12.3f, Float.NaN, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY);
+    }
+
+    @Test
+    public void testPow(){
+        testDoubleBinding2Args1(MathBindings::pow, Math::pow,
+            new Args<>(1.3, 3.2),
+            new Args<>(1.3, 0.0),
+            new Args<>(1.0, 3.2),
+            new Args<>(1.3, Double.NaN),
+            new Args<>(Double.NaN, 3.2),
+            new Args<>(Double.NaN, 0.0),
+            new Args<>(1.1, Double.POSITIVE_INFINITY),
+            new Args<>(1.0, 2.0));
+        testDoubleBinding2Args2(MathBindings::pow, Math::pow,
+            new Args<>(1.3, 3.2),
+            new Args<>(1.3, 0.0),
+            new Args<>(1.0, 3.2),
+            new Args<>(1.3, Double.NaN),
+            new Args<>(Double.NaN, 3.2),
+            new Args<>(Double.NaN, 0.0),
+            new Args<>(1.1, Double.POSITIVE_INFINITY),
+            new Args<>(1.0, 2.0));
+        testDoubleBinding2Args3(MathBindings::pow, Math::pow,
+            new Args<>(1.3, 3.2),
+            new Args<>(1.3, 0.0),
+            new Args<>(1.0, 3.2),
+            new Args<>(1.3, Double.NaN),
+            new Args<>(Double.NaN, 3.2),
+            new Args<>(Double.NaN, 0.0),
+            new Args<>(1.1, Double.POSITIVE_INFINITY),
+            new Args<>(1.0, 2.0));
     }
 
     @Test
