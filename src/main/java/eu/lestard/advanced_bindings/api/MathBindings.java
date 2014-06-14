@@ -103,19 +103,19 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#atan2(double, double)}
      */
     public static DoubleBinding atan2(final ObservableDoubleValue y, final ObservableDoubleValue x) {
-        return null;
+        return createDoubleBinding(()->Math.atan2(y.get(), x.get()),y,x);
     }
     /**
      * Binding for {@link java.lang.Math#atan2(double, double)}
      */
     public static DoubleBinding atan2(final double y, final ObservableDoubleValue x) {
-        return null;
+        return createDoubleBinding(()->Math.atan2(y, x.get()),x);
     }
     /**
      * Binding for {@link java.lang.Math#atan2(double, double)}
      */
     public static DoubleBinding atan2(final ObservableDoubleValue y, final double x) {
-        return null;
+        return createDoubleBinding(()->Math.atan2(y.get(), x),y);
     }
 
     /**
@@ -308,14 +308,14 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#getExponent(double)}
      */
     public static IntegerBinding getExponent(final ObservableDoubleValue d){
-        return null;
+        return createIntegerBinding(()->Math.getExponent(d.get()),d);
     }
 
     /**
      * Binding for {@link java.lang.Math#getExponent(float)}
      */
     public static IntegerBinding getExponent(final ObservableFloatValue f){
-        return null;
+        return createIntegerBinding(()->Math.getExponent(f.get()),f);
     }
 
 
@@ -711,16 +711,15 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#round(double)}
      */
     public static LongBinding round(final ObservableDoubleValue a){
-        return null;
+        return createLongBinding(()->Math.round(a.get()),a);
     }
 
     /**
      * Binding for {@link java.lang.Math#round(float)}
      */
     public static IntegerBinding round(final ObservableFloatValue a){
-        return null;
+        return createIntegerBinding(()->Math.round(a.get()),a);
     }
-
 
     /**
      * Binding for {@link java.lang.Math#scalb(double, int)}
@@ -871,7 +870,7 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#toIntExact(long)}
      */
     public static IntegerBinding toIntExact(final ObservableLongValue value){
-        return null;
+        return createIntegerBinding(()->Math.toIntExact(value.get()),value);
     }
 
 

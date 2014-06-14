@@ -45,12 +45,40 @@ public class MathBindingsTest {
 
     @Test
     public void testAsin(){
-        testDoubleBinding(MathBindings::acos, Math::acos, Math.PI, -Math.PI, 0, 1, -1, 1.45, Double.NaN);
+        testDoubleBinding(MathBindings::asin, Math::asin, Math.PI, -Math.PI, 0, 1, -1, 1.45, Double.NaN);
     }
 
     @Test
     public void testAtan(){
         testDoubleBinding(MathBindings::atan, Math::atan, Math.PI, -Math.PI, 0, 1, -1, 1.45, Double.NaN);
+    }
+
+    @Test
+    public void testAtan2(){
+        testDoubleBinding2Args1(MathBindings::atan2, Math::atan2,
+            new Args<>(1.2, 3.2),
+            new Args<>(0.0, 3.2),
+            new Args<>(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NaN, 1.2));
+        testDoubleBinding2Args2(MathBindings::atan2, Math::atan2,
+            new Args<>(1.2, 3.2),
+            new Args<>(0.0, 3.2),
+            new Args<>(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NaN, 1.2));
+        testDoubleBinding2Args3(MathBindings::atan2, Math::atan2,
+            new Args<>(1.2, 3.2),
+            new Args<>(0.0, 3.2),
+            new Args<>(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
+            new Args<>(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY),
+            new Args<>(Double.NaN, 1.2));
     }
 
     @Test
@@ -131,10 +159,17 @@ public class MathBindingsTest {
 
 
     @Test
+    public void testGetExponent(){
+        testDoubleBinding(MathBindings::getExponent, Math::getExponent, 2.1, 2.34, Double.NaN, Double.POSITIVE_INFINITY, 0);
+        testFloatBinding(MathBindings::getExponent, Math::getExponent, 2.1f, 2.34f, Float.NaN, Float.POSITIVE_INFINITY, 0f);
+    }
+
+
+    @Test
     public void testHypot(){
         testDoubleBinding2Args1(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
         testDoubleBinding2Args2(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
-        testDoubleBinding2Args2(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
+        testDoubleBinding2Args3(MathBindings::hypot, Math::hypot, new Args<>(1.2, 0.2), new Args<>(Double.POSITIVE_INFINITY, 0.2),new Args<>(1.2, Double.NEGATIVE_INFINITY), new Args<>(Double.NaN, 0.2));
     }
 
     @Test
@@ -346,6 +381,12 @@ public class MathBindingsTest {
     }
 
     @Test
+    public void testRound(){
+        testDoubleBinding(MathBindings::round, Math::round, 1.34, 1.89, -12.34, -32.9, Double.NaN,0 );
+        testFloatBinding(MathBindings::round, Math::round, 1.34f, 1.89f, -12.34f, -32.9f, Float.NaN,0f );
+    }
+
+    @Test
     public void testSignum(){
         testDoubleBinding(MathBindings::signum, Math::signum, -1, -1.23, -0.23, 0, 0.23, -1.23, 1, Double.NaN);
         testFloatBinding(MathBindings::signum, Math::signum, -1f, -1.23f, -0.23f, 0f, 0.23f, -1.23f, 1f, Float.NaN);
@@ -391,6 +432,11 @@ public class MathBindingsTest {
     @Test
     public void testToDegrees(){
         testDoubleBinding(MathBindings::toDegrees, Math::toDegrees, -1, 0, 1, 90, -90, 180, 360, 359, Double.NaN );
+    }
+
+    @Test
+    public void testToIntExact(){
+        testLongBinding(MathBindings::toIntExact, Math::toIntExact, -1l, 0l, 302l);
     }
 
     @Test
