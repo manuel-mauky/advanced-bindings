@@ -2,10 +2,7 @@ package eu.lestard.advanced_bindings.api;
 
 import javafx.beans.binding.*;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableFloatValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.ObservableLongValue;
+import javafx.beans.value.*;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -29,17 +26,8 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testLongArgBinding(Function<ObservableLongValue, Binding<R>> bindingFunction, Function<Long, R> mathFunction, long... args) {
-        LongProperty base = new SimpleLongProperty();
-        final Binding<R> binding = bindingFunction.apply(base);
-
-        for (long arg : args) {
-            base.set(arg);
-
-            R expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
+    static <R extends Number> void testLongArgBinding(Function<ObservableLongValue, Binding<R>> bindingFunction, Function<Long, R> mathFunction, Long... args) {
+        testBinding(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -53,17 +41,8 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testIntegerArgBinding(Function<ObservableIntegerValue, Binding<R>> bindingFunction, Function<Integer, R> mathFunction, int... args) {
-        IntegerProperty base = new SimpleIntegerProperty();
-        final Binding<R> binding = bindingFunction.apply(base);
-
-        for (int arg : args) {
-            base.set(arg);
-
-            R expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
+    static <R extends Number> void testIntegerArgBinding(Function<ObservableIntegerValue, Binding<R>> bindingFunction, Function<Integer, R> mathFunction, Integer... args) {
+        testBinding(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -77,20 +56,8 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testDoubleArgBinding(Function<ObservableDoubleValue, Binding<R>> bindingFunction, Function<Double, R> mathFunction, double... args) {
-
-        DoubleProperty base = new SimpleDoubleProperty();
-
-        final Binding<R> binding = bindingFunction.apply(base);
-
-        for (double arg : args) {
-
-            base.set(arg);
-
-            R expectedResult = mathFunction.apply(arg);
-
-            assertThat(binding).hasValue(expectedResult);
-        }
+    static <R extends Number> void testDoubleArgBinding(Function<ObservableDoubleValue, Binding<R>> bindingFunction, Function<Double, R> mathFunction, Double... args) {
+        testBinding(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -104,18 +71,45 @@ public class MathBindingsTestHelper {
      * @param <R>             the generic type of the return type of the math function
      */
     @SuppressWarnings("unchecked")
-    static <R extends Number> void testFloatArgBinding(Function<ObservableFloatValue, Binding<R>> bindingFunction, Function<Float, R> mathFunction, float... args) {
+    static <R extends Number> void testFloatArgBinding(Function<ObservableFloatValue, Binding<R>> bindingFunction, Function<Float, R> mathFunction, Float... args) {
+        testBinding(bindingFunction, mathFunction, args);
+    }
 
-        FloatProperty base = new SimpleFloatProperty();
+    /**
+     * @param <A>   the type of the argument
+     * @param <Obs> the type of the observable
+     * @param <R>   the type of the return value
+     */
+    @SuppressWarnings("unchecked")
+    private static <A extends Number, Obs extends ObservableNumberValue, R extends Number> void testBinding(Function<Obs, Binding<R>> bindingFunction, Function<A, R> mathFunction, A... args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("No args to verify!");
+        }
 
-        final Binding<R> binding = bindingFunction.apply(base);
+        Property base = createProperty(args[0]);
 
-        for (float arg : args) {
-            base.set(arg);
+        final Binding<R> binding = bindingFunction.apply((Obs) base);
+
+        for (A arg : args) {
+            base.setValue(arg);
 
             R expectedResult = mathFunction.apply(arg);
 
             assertThat(binding).hasValue(expectedResult);
+        }
+    }
+
+    private static <A extends Number> Property createProperty(A arg) {
+        if (arg instanceof Integer) {
+            return new SimpleIntegerProperty();
+        } else if (arg instanceof Long) {
+            return new SimpleLongProperty();
+        } else if (arg instanceof Float) {
+            return new SimpleFloatProperty();
+        } else if (arg instanceof Double) {
+            return new SimpleDoubleProperty();
+        } else {
+            throw new IllegalArgumentException("Illegal type of arguments");
         }
     }
 
