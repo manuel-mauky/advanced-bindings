@@ -1,5 +1,8 @@
 package eu.lestard.advanced_bindings.api;
 
+import javafx.beans.value.ObservableDoubleValue;
+import javafx.beans.value.ObservableFloatValue;
+import javafx.beans.value.ObservableIntegerValue;
 import org.junit.Test;
 
 import static eu.lestard.advanced_bindings.api.MathBindingsTestHelper.*;
@@ -384,6 +387,39 @@ public class MathBindingsTest {
         testDoubleArgBinding(MathBindings::round, Math::round, 1.34, 1.89, -12.34, -32.9, Double.NaN, 0d);
         testFloatArgBinding(MathBindings::round, Math::round, 1.34f, 1.89f, -12.34f, -32.9f, Float.NaN, 0f);
     }
+
+
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testScalb(){
+
+        MathBindingsTestHelper.<Float, Integer, ObservableFloatValue, ObservableIntegerValue, Number>
+            testTwoArgBinding1(MathBindings::scalb, Math::scalb, new Args<>(12f, 12), new Args<>(Float.NaN, 12), new Args<>(Float.POSITIVE_INFINITY, 3), new Args<>(0f, 3));
+
+        MathBindingsTestHelper.<Float, Integer,  ObservableIntegerValue, Number>
+            testTwoArgBinding2(MathBindings::scalb, Math::scalb, new Args<>(12f, 12), new Args<>(Float.NaN, 12), new Args<>(Float.POSITIVE_INFINITY, 3), new Args<>(0f, 3));
+
+        MathBindingsTestHelper.<Float, Integer,  ObservableFloatValue, Number>
+            testTwoArgBinding3(MathBindings::scalb, Math::scalb, new Args<>(12f, 12), new Args<>(Float.NaN, 12), new Args<>(Float.POSITIVE_INFINITY, 3), new Args<>(0f, 3));
+
+
+
+        MathBindingsTestHelper.<Double, Integer, ObservableDoubleValue, ObservableIntegerValue, Number>
+            testTwoArgBinding1(MathBindings::scalb, Math::scalb, new Args<>(12d, 12), new Args<>(Double.NaN, 12), new Args<>(Double.POSITIVE_INFINITY, 3), new Args<>(0d, 3));
+
+        MathBindingsTestHelper.<Double, Integer,  ObservableIntegerValue, Number>
+            testTwoArgBinding2(MathBindings::scalb, Math::scalb, new Args<>(12d, 12), new Args<>(Double.NaN, 12), new Args<>(Double.POSITIVE_INFINITY, 3), new Args<>(0d, 3));
+
+        MathBindingsTestHelper.<Double, Integer,  ObservableDoubleValue, Number>
+            testTwoArgBinding3(MathBindings::scalb, Math::scalb, new Args<>(12d, 12), new Args<>(Double.NaN, 12), new Args<>(Double.POSITIVE_INFINITY, 3), new Args<>(0d, 3));
+
+
+
+    }
+
+
+
 
     @Test
     public void testSignum() {

@@ -1,6 +1,6 @@
 package eu.lestard.advanced_bindings.api;
 
-import javafx.beans.binding.*;
+import javafx.beans.binding.Binding;
 import javafx.beans.property.*;
 import javafx.beans.value.*;
 
@@ -104,7 +104,7 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static  <R extends Number> void testIntegerBinding2Args2(BiFunction<Integer, ObservableIntegerValue, Binding<R>> bindingFunction, BiFunction<Integer, Integer, R> mathFunction, Args<Integer, Integer>... args) {
+    static <R extends Number> void testIntegerBinding2Args2(BiFunction<Integer, ObservableIntegerValue, Binding<R>> bindingFunction, BiFunction<Integer, Integer, R> mathFunction, Args<Integer, Integer>... args) {
         testTwoArgBinding2(bindingFunction, mathFunction, args);
     }
 
@@ -121,8 +121,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static  <R extends Number> void testIntegerBinding2Args3(BiFunction<ObservableIntegerValue, Integer, Binding<R>> bindingFunction, BiFunction<Integer, Integer, R> mathFunction, Args<Integer, Integer>... args) {
-        testTwoArgBinding3(bindingFunction,mathFunction,args);
+    static <R extends Number> void testIntegerBinding2Args3(BiFunction<ObservableIntegerValue, Integer, Binding<R>> bindingFunction, BiFunction<Integer, Integer, R> mathFunction, Args<Integer, Integer>... args) {
+        testTwoArgBinding3(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -152,8 +152,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static <R extends Number>  void testLongBinding2Args2(BiFunction<Long, ObservableLongValue, Binding<R>> bindingFunction, BiFunction<Long, Long, R> mathFunction, Args<Long, Long>... args) {
-        testTwoArgBinding2(bindingFunction,mathFunction,args);
+    static <R extends Number> void testLongBinding2Args2(BiFunction<Long, ObservableLongValue, Binding<R>> bindingFunction, BiFunction<Long, Long, R> mathFunction, Args<Long, Long>... args) {
+        testTwoArgBinding2(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -168,8 +168,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static <R extends Number>  void testLongBinding2Args3(BiFunction<ObservableLongValue, Long, Binding<R>> bindingFunction, BiFunction<Long, Long, R> mathFunction, Args<Long, Long>... args) {
-        testTwoArgBinding3(bindingFunction,mathFunction,args);
+    static <R extends Number> void testLongBinding2Args3(BiFunction<ObservableLongValue, Long, Binding<R>> bindingFunction, BiFunction<Long, Long, R> mathFunction, Args<Long, Long>... args) {
+        testTwoArgBinding3(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -198,8 +198,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static  <R extends Number> void testFloatBinding2Args2(BiFunction<Float, ObservableFloatValue, Binding<R>> bindingFunction, BiFunction<Float, Float, R> mathFunction, Args<Float, Float>... args) {
-        testTwoArgBinding2(bindingFunction,mathFunction,args);
+    static <R extends Number> void testFloatBinding2Args2(BiFunction<Float, ObservableFloatValue, Binding<R>> bindingFunction, BiFunction<Float, Float, R> mathFunction, Args<Float, Float>... args) {
+        testTwoArgBinding2(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -213,8 +213,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static <R extends Number>  void testFloatBinding2Args3(BiFunction<ObservableFloatValue, Float, Binding<R>> bindingFunction, BiFunction<Float, Float, R> mathFunction, Args<Float, Float>... args) {
-        testTwoArgBinding3(bindingFunction,mathFunction,args);
+    static <R extends Number> void testFloatBinding2Args3(BiFunction<ObservableFloatValue, Float, Binding<R>> bindingFunction, BiFunction<Float, Float, R> mathFunction, Args<Float, Float>... args) {
+        testTwoArgBinding3(bindingFunction, mathFunction, args);
     }
 
 
@@ -246,8 +246,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static <R extends Number>  void testDoubleBinding2Args2(BiFunction<Double, ObservableDoubleValue, Binding<R>> bindingFunction, BiFunction<Double, Double, R> mathFunction, Args<Double, Double>... args) {
-        testTwoArgBinding2(bindingFunction,mathFunction,args);
+    static <R extends Number> void testDoubleBinding2Args2(BiFunction<Double, ObservableDoubleValue, Binding<R>> bindingFunction, BiFunction<Double, Double, R> mathFunction, Args<Double, Double>... args) {
+        testTwoArgBinding2(bindingFunction, mathFunction, args);
     }
 
     /**
@@ -262,8 +262,8 @@ public class MathBindingsTestHelper {
      * @param args            example arguments that are used to verify.
      */
     @SafeVarargs
-    static <R extends Number>  void testDoubleBinding2Args3(BiFunction<ObservableDoubleValue, Double, Binding<R>> bindingFunction, BiFunction<Double, Double, R> mathFunction, Args<Double, Double>... args) {
-        testTwoArgBinding3(bindingFunction,mathFunction,args);
+    static <R extends Number> void testDoubleBinding2Args3(BiFunction<ObservableDoubleValue, Double, Binding<R>> bindingFunction, BiFunction<Double, Double, R> mathFunction, Args<Double, Double>... args) {
+        testTwoArgBinding3(bindingFunction, mathFunction, args);
     }
 
 
@@ -307,7 +307,7 @@ public class MathBindingsTestHelper {
 
 
     @SuppressWarnings("unchecked")
-    private static <A1 extends Number, A2 extends Number, Obs1 extends ObservableNumberValue, Obs2 extends ObservableNumberValue, R extends Number> void testTwoArgBinding1(BiFunction<Obs1, Obs2, Binding<R>> bindingFunction, BiFunction<A1, A2, R> mathFunction, Args<A1, A2>... args) {
+    static <A1 extends Number, A2 extends Number, Obs1 extends ObservableNumberValue, Obs2 extends ObservableNumberValue, R extends Number> void testTwoArgBinding1(BiFunction<Obs1, Obs2, Binding<R>> bindingFunction, BiFunction<A1, A2, R> mathFunction, Args<A1, A2>... args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("No args to verify!");
         }
@@ -328,7 +328,7 @@ public class MathBindingsTestHelper {
     }
 
     @SuppressWarnings("unchecked")
-    private static <A1 extends Number, A2 extends Number, Obs extends ObservableNumberValue, R extends Number>
+    static <A1 extends Number, A2 extends Number, Obs extends ObservableNumberValue, R extends Number>
     void testTwoArgBinding2(BiFunction<A1, Obs, Binding<R>> bindingFunction, BiFunction<A1, A2, R> mathFunction, Args<A1, A2>... args) {
 
         if (args.length == 0) {
@@ -348,7 +348,7 @@ public class MathBindingsTestHelper {
     }
 
     @SuppressWarnings("unchecked")
-    private static <A1 extends Number, A2 extends Number, Obs extends ObservableNumberValue, R extends Number>
+    static <A1 extends Number, A2 extends Number, Obs extends ObservableNumberValue, R extends Number>
     void testTwoArgBinding3(BiFunction<Obs, A2, Binding<R>> bindingFunction, BiFunction<A1, A2, R> mathFunction, Args<A1, A2>... args) {
 
         if (args.length == 0) {

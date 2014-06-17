@@ -13,6 +13,10 @@ import static javafx.beans.binding.Bindings.*;
 
 public class MathBindings {
 
+    private MathBindings() {
+    }
+
+
     /**
      * Binding for {@link java.lang.Math#abs(int)}
      */
@@ -770,21 +774,21 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#scalb(double, int)}
      */
     public static DoubleBinding scalb(final ObservableDoubleValue d, final ObservableIntegerValue scaleFactor) {
-        return null;
+        return createDoubleBinding(()->Math.scalb(d.get(), scaleFactor.get()), d, scaleFactor);
     }
 
     /**
      * Binding for {@link java.lang.Math#scalb(double, int)}
      */
     public static DoubleBinding scalb(final double d, final ObservableIntegerValue scaleFactor) {
-        return null;
+        return createDoubleBinding(()->Math.scalb(d, scaleFactor.get()), scaleFactor);
     }
 
     /**
      * Binding for {@link java.lang.Math#scalb(double, int)}
      */
     public static DoubleBinding scalb(final ObservableDoubleValue d, final int scaleFactor) {
-        return null;
+        return createDoubleBinding(()->Math.scalb(d.get(), scaleFactor), d);
     }
 
 
@@ -792,21 +796,21 @@ public class MathBindings {
      * Binding for {@link java.lang.Math#scalb(float, int)}
      */
     public static FloatBinding scalb(final ObservableFloatValue f, final ObservableIntegerValue scaleFactor) {
-        return null;
+        return createFloatBinding(()->Math.scalb(f.get(), scaleFactor.get()),f, scaleFactor);
     }
 
     /**
      * Binding for {@link java.lang.Math#scalb(float, int)}
      */
     public static FloatBinding scalb(final float f, final ObservableIntegerValue scaleFactor) {
-        return null;
+        return createFloatBinding(()->Math.scalb(f, scaleFactor.get()), scaleFactor);
     }
 
     /**
      * Binding for {@link java.lang.Math#scalb(float, int)}
      */
     public static FloatBinding scalb(final ObservableFloatValue f, final int scaleFactor) {
-        return null;
+        return createFloatBinding(()->Math.scalb(f.get(), scaleFactor),f);
     }
 
 
