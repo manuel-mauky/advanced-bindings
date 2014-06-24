@@ -4,4 +4,33 @@
 development of applications that are heavily based on JavaFX's Properties
 and Bindings. 
 
-The first goal for this project it to create custom bindings for the (all) methods of `java.lang.Math`. 
+## Features
+
+### MathBindings
+`eu.lestard.advanced_bindings.api.MathBindings.*`
+
+Contains Bindings for all methods of `java.lang.Math`
+
+Example:
+
+```java
+@Test
+public void testPow(){
+
+    DoubleProperty a = new SimpleDoubleProperty(3);
+    DoubleProperty b = new SimpleDoubleProperty(2);
+
+    final DoubleBinding pow = MathBindings.pow(a, b);
+
+    // 3^2 = 9
+    assertThat(pow).hasValue(9.0);
+
+    a.set(5);
+    b.set(3);
+
+    // 5^3 = 125
+    assertThat(pow).hasValue(125.0);
+}
+```
+
+
