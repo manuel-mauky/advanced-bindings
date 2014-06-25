@@ -1,4 +1,6 @@
 apply plugin: "java"
+apply plugin: "maven"
+apply plugin: "signing"
 apply plugin: 'sonar-runner'
 apply plugin: "jacoco"
 
@@ -35,5 +37,121 @@ sonarRunner {
         properties["sonar.libraries"] += System.env.'JAVA_HOME' + "/jre/lib/ext/jfxrt.jar"
         property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/test.exec"
         property 'sonar.junit.reportsPath', "${buildDir}/test-results"
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from "build/docs/javadoc"
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = "sources"
+}
+
+
+artifacts {
+    archives jar
+
+    archives javadocJar
+    archives sourcesJar
+}
+
+def sonatypeRepositoryUrl
+
+def isDevBuild
+def isSnapshotBuild
+def isReleaseBuild
+
+
+
+// release with 'gradle uploadArchives -Prelease'
+// release snapshot with 'gradle uploadArchives -Psnapshot'
+if (hasProperty("release")) {
+    println "release"
+    isReleaseBuild = true
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+} else if (hasProperty("snapshot")) {
+    println "snapshot"
+    isSnapshotBuild = true
+    version += "-SNAPSHOT"
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+} else {
+    println "dev build"
+    isDevBuild = true
+}
+
+//********* artifact signing *********
+if (isReleaseBuild) {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives {
+        // do nothing
+    }
+}
+
+
+uploadArchives {
+    repositories {
+        if (isDevBuild) {
+            mavenLocal()
+        } else {
+            mavenDeployer {
+                if(isReleaseBuild) {
+                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                }
+
+                repository(url: sonatypeRepositoryUrl) {
+                    authentication(userName: sonatypeUsername, password: sonatypePassword)
+                }
+
+                pom.project {
+                    name = "advanced-bindings"
+                    packaging = "jar"
+                    description "Library of JavaFX Custom Bindings"
+                    url "https://github.com/lestard/advanced-bindings"
+
+                    scm {
+                        url "scm:git@github.com:lestard/advanced-bindings.git"
+                        connection "scm:git@github.com:lestard/advanced-bindings.git"
+                        developerConnection "scm:git@github.com:lestard/advanced-bindings.git"
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id "manuel.mauky"
+                            name "Manuel Mauky"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+import org.gradle.plugins.signing.Sign
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
+        // Use Java 6's console to read from the console (no good for a CI environment)
+        Console console = System.console()
+        console.printf "\n\nWe have to sign some things in this build.\n\nPlease enter your signing details.\n\n"
+
+        def password = console.readPassword("PGP Private Key Password: ")
+
+        allprojects { ext."signing.password" = password }
+
+        console.printf "\nThanks.\n\n"
     }
 }
