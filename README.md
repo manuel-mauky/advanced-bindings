@@ -33,6 +33,23 @@ public void testPow(){
 }
 ```
 
+## How to Use
+
+Gradle: 
+```groovy
+compile 'eu.lestard:advanced-bindings:0.1.0'
+```
+
+Maven:
+```xml
+<dependency>
+    <groupId>eu.lestard</groupId>
+    <artifactId>advanced-bindings</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
+
 
 ## Links
 
