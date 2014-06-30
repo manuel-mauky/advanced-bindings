@@ -31,5 +31,24 @@ public class NumberBindingsTest {
         assertThat(nan).isTrue();
     }
 
+    @Test
+    public void testIsInfinite(){
+        DoubleProperty a = new SimpleDoubleProperty();
+        DoubleProperty b = new SimpleDoubleProperty();
+
+        DoubleBinding product =  a.multiply(b);
+
+        BooleanBinding infinite = NumberBindings.isInfinite(product);
+
+
+        a.set(2);
+        b.set(4);
+
+        assertThat(infinite).isFalse();
+
+        b.set(Double.MAX_VALUE);
+
+        assertThat(infinite).isTrue();
+    }
 
 }
