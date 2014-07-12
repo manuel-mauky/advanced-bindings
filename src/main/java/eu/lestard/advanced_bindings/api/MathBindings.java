@@ -11,6 +11,12 @@ import javafx.beans.value.ObservableLongValue;
 
 import static javafx.beans.binding.Bindings.*;
 
+
+/**
+ * This class contains binding implementations for all methods of {@link java.lang.Math}.
+ *
+ * @author manuel mauky
+ */
 public class MathBindings {
 
     /**
