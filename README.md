@@ -139,7 +139,7 @@ public void testSum(){
 
 ## new Features?
 
-If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](/issues). 
+If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](../../issues). 
 
 ## How to Use
 
