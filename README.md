@@ -33,6 +33,114 @@ public void testPow(){
 }
 ```
 
+### NumberBindings
+
+Example: **isNaN**
+
+```java
+@Test
+public void testIsNan(){
+    DoubleProperty a = new SimpleDoubleProperty();
+    DoubleProperty b = new SimpleDoubleProperty();
+
+    final DoubleBinding quotient = a.divide(b);
+    BooleanBinding nan = NumberBindings.isNaN(quotient);
+
+
+    a.set(2);
+    b.set(4);
+
+    assertThat(nan).isFalse();
+
+
+    a.set(0);
+    b.set(0);
+
+    assertThat(nan).isTrue();
+}
+
+```
+
+Example 2: **isInfinite**
+```java
+@Test
+public void testIsInfinite(){
+    DoubleProperty a = new SimpleDoubleProperty();
+    DoubleProperty b = new SimpleDoubleProperty();
+
+    DoubleBinding product =  a.multiply(b);
+
+    BooleanBinding infinite = NumberBindings.isInfinite(product);
+
+
+    a.set(2);
+    b.set(4);
+
+    assertThat(infinite).isFalse();
+
+    b.set(Double.MAX_VALUE);
+
+    assertThat(infinite).isTrue();
+}
+
+```
+
+
+
+### StringBindings
+
+Example: **RegExp**
+
+```java
+@Test
+public void testMatches(){
+    StringProperty text = new SimpleStringProperty();
+
+    String pattern = "[0-9]*";  // only numbers are allowed
+    
+    BooleanBinding matches = StringBindings.matches(text, pattern);
+
+
+    text.set("19");
+    
+    assertThat(matches).isTrue();
+    
+    
+    text.set("no number");
+
+    assertThat(matches).isFalse();
+}
+
+```
+
+
+### CollectionBindings
+
+Example: **Sum** of all integers in an observable list
+
+```java
+@Test
+public void testSum(){
+    ObservableList<Integer> numbers = FXCollections.observableArrayList();
+
+    NumberBinding sum = CollectionBindings.sum(numbers);
+
+
+    numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+    assertThat(sum).hasValue(53.0);
+
+    numbers.add(34);
+
+    assertThat(sum).hasValue(87.0);
+}
+
+```
+
+## new Features?
+
+If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](/issues). 
+
 ## How to Use
 
 Gradle: 
