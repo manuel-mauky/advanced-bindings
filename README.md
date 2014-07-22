@@ -1,5 +1,8 @@
 # Advanced-Bindings for JavaFX (8)
 
+[![Build Status](https://travis-ci.org/lestard/advanced-bindings.svg?branch=master)](https://travis-ci.org/lestard/advanced-bindings)
+
+
 **advanced-bindings** is a collection of useful helpers and custom binding implementations to simplify the 
 development of applications that are heavily based on JavaFX's Properties
 and Bindings. 
