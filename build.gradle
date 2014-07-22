@@ -44,6 +44,11 @@ sonarRunner {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+}
+
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = "javadoc"
     from "build/docs/javadoc"
