@@ -1,4 +1,11 @@
 language: java
-
 jdk:
-  - oraclejdk8
+- oraclejdk8
+
+env:
+  global:
+  - secure: fr/+YihxsDim2xaxB5qNmN8CJoYRGk31JTY8QvVjeN7Ur+4hbHpGW6irL69I6mCrQsPWv8B+qKcnzgnfXGKv4mrkDP4n/m952p7UDzbaW+cwuTmJ1FJe/EQGEXPrWG7AJblU5SxG4AZwFzxkJfmqsaaOV70Dl8JeYUCL+BJCt30=
+  - secure: EUy/u0U7WcZpjSgj6uJMM37VcTiUKcXeGNflkJ8RmKYjysUoUfAdRKP1D5UF13zzwATLrMjG6b1qbMQtISNgpVCLbFuqPOS8e5Ur/lfcHFs7qqQbWc0DSSUuXdSAuQ6A7N+ontMBKy3wkw//ZhULATMvLuMG29Uuua7Qvk6ZWIk=
+
+after_success:
+  - gradle uploadArchives -Psnapshot -PsonatypeUsername=$SONATYPE_USERNAME -PsonatypePassword=$SONATYPE_PASSWORD
