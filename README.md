@@ -164,4 +164,4 @@ Maven:
 
 ## Links
 
-[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.1.0/)
+[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.1.1/)
