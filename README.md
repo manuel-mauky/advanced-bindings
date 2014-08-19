@@ -148,7 +148,7 @@ If you have ideas for new custom bindings that could be added to the library fee
 
 Gradle: 
 ```groovy
-compile 'eu.lestard:advanced-bindings:0.1.0'
+compile 'eu.lestard:advanced-bindings:0.1.1'
 ```
 
 Maven:
@@ -156,7 +156,7 @@ Maven:
 <dependency>
     <groupId>eu.lestard</groupId>
     <artifactId>advanced-bindings</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
