@@ -11,6 +11,7 @@ group = "eu.lestard"
 version = "0.1.1"
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven{
         url "https://oss.sonatype.org/content/repositories/snapshots/"
