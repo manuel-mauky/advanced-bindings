@@ -24,6 +24,14 @@ public class NumberBindings {
         return divideSafe(dividend, divisor, new SimpleDoubleProperty(0));
     }
 
+    public static NumberBinding divideSafe(double dividend, ObservableNumberValue divisor){
+        return divideSafe(new SimpleDoubleProperty(dividend), divisor);
+    }
+
+    public static NumberBinding divideSafe(ObservableNumberValue dividend, double divisor){
+        return divideSafe(dividend, new SimpleDoubleProperty(divisor));
+    }
+
     public static NumberBinding divideSafe(ObservableNumberValue dividend, ObservableNumberValue divisor, ObservableNumberValue defaultValue) {
         return Bindings.createDoubleBinding(() -> {
 
@@ -36,8 +44,21 @@ public class NumberBindings {
         }, dividend, divisor);
     }
 
+    public static NumberBinding divideSafe(ObservableNumberValue dividend, ObservableNumberValue divisor, double defaultValue) {
+        return divideSafe(dividend, divisor, new SimpleDoubleProperty(defaultValue));
+    }
+
+
     public static IntegerBinding divideSafe(ObservableIntegerValue dividend, ObservableIntegerValue divisor){
         return divideSafe(dividend, divisor, new SimpleIntegerProperty(0));
+    }
+
+    public static IntegerBinding divideSafe(int dividend, ObservableIntegerValue divisor) {
+        return divideSafe(new SimpleIntegerProperty(dividend), divisor);
+    }
+
+    public static IntegerBinding divideSafe(ObservableIntegerValue dividend, int divisor){
+        return divideSafe(dividend, new SimpleIntegerProperty(divisor));
     }
 
     public static IntegerBinding divideSafe(ObservableIntegerValue dividend, ObservableIntegerValue divisor, ObservableIntegerValue defaultValue){
@@ -50,5 +71,9 @@ public class NumberBindings {
             }
 
         }, dividend, divisor);
+    }
+
+    public static IntegerBinding divideSafe(ObservableIntegerValue dividend, ObservableIntegerValue divisor, int defaultValue){
+        return divideSafe(dividend, divisor, new SimpleIntegerProperty(defaultValue));
     }
 }
