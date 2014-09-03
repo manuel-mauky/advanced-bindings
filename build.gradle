@@ -8,7 +8,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = "eu.lestard"
-version = "0.1.1"
+version = "0.1.2"
 
 repositories {
     mavenLocal()
@@ -34,7 +34,7 @@ jacoco {
 }
 
 javadoc{
-    options.addStringOption("link","http://docs.oracle.com/javase/8/docs/api/")
+    options.links "http://docs.oracle.com/javase/8/docs/api/", "http://docs.oracle.com/javase/8/javafx/api"
 }
 
 sonarRunner {
