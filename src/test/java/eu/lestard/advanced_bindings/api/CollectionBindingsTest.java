@@ -23,6 +23,8 @@ public class CollectionBindingsTest {
         numbers.add(34);
 
         assertThat(sum).hasValue(87.0);
+
+
     }
 
     @Test

@@ -128,16 +128,20 @@ public class NumberBindings {
      * divisor)
      * is zero. Instead an default value of <code>0</code> is returned.
      *
-     * This can be useful because bindings like this:
+     * This can be useful because bindings like this aren't working as expected:
      *
      * <pre>
      *     IntegerProperty a = ...;
      *     IntegerProperty b = ...;
      *
-     *     NumberBinding result = Bindings.when(b.isEqualTo(0)).then(0).otherwise(a.divide(b));
+     *     NumberBinding result = Bindings
+     *          .when(b.isEqualTo(0))
+     *          .then(0)
+     *          .otherwise(a.divide(b));
      * </pre>
      *
-     * The binding in the example will throw an {@link java.lang.ArithmeticException} when <code>b</code>
+     * At first one would expect that this binding will have a value <code>0</code> when <code>b</code> is <code>0</code>.
+     * Instead the binding in the example will throw an {@link java.lang.ArithmeticException} when <code>b</code>
      * has an (initial) value of 0. The when-otherwise construct doesn't help in this case because
      * the <code>divide</code> binding will still be evaluated.
      *
