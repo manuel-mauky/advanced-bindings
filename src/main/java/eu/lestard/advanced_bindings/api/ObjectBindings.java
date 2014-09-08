@@ -15,10 +15,10 @@ public class ObjectBindings {
      * <p>
      *
      * This binding is null safe: When the given observable has a value of <code>null</code> the created binding
-     * will also contain <code>null</code>.<br>
-     * (Hint: if you like to specify another default value look at {@link #extract(javafx.beans.value.ObservableValue, java.util.function.Function, Object)}).
+     * will also contain <code>null</code> but will <strong>not</strong> throw a {@link java.lang.NullPointerException}.<br>
+     * (Hint: if you like to specify another default value look at {@link #map(javafx.beans.value.ObservableValue, java.util.function.Function, Object)}).
      * <p>
-     * If the given observable's value is <b>not</b> <code>null</code> the function will be applied to the value and the
+     * If the given observable`s value is <strong>not</strong> <code>null</code> the function will be applied to the value and the
      * return value of the function is used as the value of the created binding.
      * <p>
      * A common use case for this binding is when you are interested in a property of the object of an observable value.
@@ -35,7 +35,7 @@ public class ObjectBindings {
      *
      *     ObjectProperty{@code<Person>} personProperty = ...
      *
-     *     ObjectBinding{@code<String>} name = ObjectBindings.extract(personProperty, Person::getName);
+     *     ObjectBinding{@code<String>} name = ObjectBindings.map(personProperty, Person::getName);
      * </pre>
      *
      * The "name" binding in the example always contains the name of the Person that the "personProperty" is holding.
@@ -49,6 +49,8 @@ public class ObjectBindings {
      *     assertThat(name.get()).isNull();
      * </pre>
      *
+     * Your mapping function will only be called when the observable value is not null. This means that you don't need to check for <code>null</code> param
+     * in you mapping function.
      *
      * @param source the observable value that is the source for this binding.
      * @param function a function that maps the value of the source to the target binding.
@@ -56,8 +58,8 @@ public class ObjectBindings {
      * @param <R> the generic type of the resulting binding.
      * @return the created binding.
      */
-    public static <S, R> ObjectBinding<R> extract(ObservableValue<S> source, Function<? super S, ? extends R> function) {
-        return extract(source, function, null);
+    public static <S, R> ObjectBinding<R> map(ObservableValue<S> source, Function<? super S, ? extends R> function) {
+        return map(source, function, null);
     }
 
     /**
@@ -67,7 +69,7 @@ public class ObjectBindings {
      * <p>
      * The given function will never get <code>null</code> as param so you don't need to check for this.
      * <p>
-     * See {@link #extract(javafx.beans.value.ObservableValue, java.util.function.Function, Object)} for a detailed explanation of
+     * See {@link #map(javafx.beans.value.ObservableValue, java.util.function.Function, Object)} for a detailed explanation of
      * the binding.
      *
      * @param source the observable value that is the source for this binding.
@@ -77,7 +79,7 @@ public class ObjectBindings {
      * @param <R> the generic type of the resulting binding.
      * @return the created binding.
      */
-    public static <S, R> ObjectBinding<R> extract(ObservableValue<S> source, Function<? super S, ? extends R> function, R defaultValue){
+    public static <S, R> ObjectBinding<R> map(ObservableValue<S> source, Function<? super S, ? extends R> function, R defaultValue){
         return Bindings.createObjectBinding(()->{
             S sourceValue = source.getValue();
 

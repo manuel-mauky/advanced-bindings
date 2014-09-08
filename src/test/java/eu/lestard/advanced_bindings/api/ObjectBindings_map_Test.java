@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static eu.lestard.assertj.javafx.api.Assertions.*;
 
-public class ObjectBindings_extract_Test {
+public class ObjectBindings_map_Test {
 
     private static class Person{
         private final String name;
@@ -26,10 +26,10 @@ public class ObjectBindings_extract_Test {
 
 
     @Test
-    public void testExtract(){
+    public void testMap(){
         ObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
-        ObjectBinding<String> name = ObjectBindings.extract(selectedPerson, Person::getName);
+        ObjectBinding<String> name = ObjectBindings.map(selectedPerson, Person::getName);
         assertThat(name).hasNullValue();
 
         selectedPerson.set(obi);
@@ -40,10 +40,10 @@ public class ObjectBindings_extract_Test {
     }
 
     @Test
-    public void testExtractWithDefaultValue(){
+    public void testMapWithDefaultValue(){
         ObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
-        ObjectBinding<String> name = ObjectBindings.extract(selectedPerson, Person::getName, "empty");
+        ObjectBinding<String> name = ObjectBindings.map(selectedPerson, Person::getName, "empty");
         assertThat(name).hasValue("empty");
         selectedPerson.set(obi);
         assertThat(name).hasValue("Obi-Wan");
