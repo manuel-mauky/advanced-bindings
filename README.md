@@ -140,7 +140,8 @@ public void testSum(){
 
 ```
 
-## new Features?
+
+## New Features?
 
 If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](../../issues). 
 
@@ -148,7 +149,7 @@ If you have ideas for new custom bindings that could be added to the library fee
 
 Gradle: 
 ```groovy
-compile 'eu.lestard:advanced-bindings:0.1.1'
+compile 'eu.lestard:advanced-bindings:0.2.0'
 ```
 
 Maven:
@@ -156,7 +157,7 @@ Maven:
 <dependency>
     <groupId>eu.lestard</groupId>
     <artifactId>advanced-bindings</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -164,4 +165,4 @@ Maven:
 
 ## Links
 
-[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.1.1/)
+[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.2.0/)
