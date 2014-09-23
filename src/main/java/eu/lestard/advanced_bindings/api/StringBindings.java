@@ -11,7 +11,7 @@ public class StringBindings {
 
 
     /**
-     * Creates a boolean binding that is <code>true</code> when the given observable string matches the given
+     * Creates a boolean binding that is `true` when the given observable string matches the given
      * RegExp pattern.
      *
      * @param text the observable string that is verified.
@@ -26,7 +26,7 @@ public class StringBindings {
     }
 
     /**
-     * Creates a boolean binding that is <code>true</code> when the given observable string matches the given
+     * Creates a boolean binding that is `true` when the given observable string matches the given
      * RegExp pattern (also given as observable string).
      *
      * @param text the observable string that is verified.

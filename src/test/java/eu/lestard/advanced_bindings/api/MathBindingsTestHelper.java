@@ -16,8 +16,8 @@ public class MathBindingsTestHelper {
 
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Long</code> and returns a value of generic type
-     * <code>R</code>.
+     * Helper for math methods that take **one** param of type `Long` and returns a value of generic type
+     * `R`.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -31,8 +31,8 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Integer</code> and returns a
-     * value of generic type <code>R</code>.
+     * Helper for math methods that take **one** param of type `Integer` and returns a
+     * value of generic type `R`.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -46,8 +46,8 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Double</code> and returns a
-     * value of generic type <code>R</code>.
+     * Helper for math methods that take **one** param of type `Double` and returns a
+     * value of generic type `R`.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -61,8 +61,8 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>one</b> param of type <code>Float</code> and returns a  value of generic
-     * type <code>R</code>.
+     * Helper for math methods that take **one** param of type `Float` and returns a  value of generic
+     * type `R`.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -77,10 +77,10 @@ public class MathBindingsTestHelper {
 
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Integer</code> and returns a
-     * <code>Integer</code>.
+     * Helper for math methods that take **two** param of type `Integer` and returns a
+     * `Integer`.
      *
-     * This method is used for bindings where <b>both</b> args are observables.
+     * This method is used for bindings where **both** args are observables.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -93,10 +93,10 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Integer</code> and returns a
-     * <code>Integer</code>.
+     * Helper for math methods that take **two** param of type `Integer` and returns a
+     * `Integer`.
      *
-     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     * This method is used for bindings where only the **second** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -110,10 +110,10 @@ public class MathBindingsTestHelper {
 
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Integer</code> and returns a
-     * <code>Integer</code>.
+     * Helper for math methods that take **two** param of type `Integer` and returns a
+     * `Integer`.
      *
-     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     * This method is used for bindings where only the **first** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -126,9 +126,9 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Long</code> and returns a <code>Long</code>.
+     * Helper for math methods that take **two** param of type `Long` and returns a `Long`.
      *
-     * This method is used for bindings where <b>both</b> args are observables.
+     * This method is used for bindings where **both** args are observables.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -141,10 +141,10 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Integer</code> and returns a
-     * <code>Integer</code>.
+     * Helper for math methods that take **two** param of type `Integer` and returns a
+     * `Integer`.
      *
-     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     * This method is used for bindings where only the **second** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -157,10 +157,10 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Integer</code> and returns a
-     * <code>Integer</code>.
+     * Helper for math methods that take **two** param of type `Integer` and returns a
+     * `Integer`.
      *
-     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     * This method is used for bindings where only the **first** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -173,9 +173,9 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     * Helper for math methods that take **two** param of type `Float` and returns a `Float`.
      *
-     * This method is used for bindings where <b>both</b> args are observables.
+     * This method is used for bindings where **both** args are observables.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -188,9 +188,9 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     * Helper for math methods that take **two** param of type `Float` and returns a `Float`.
      *
-     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     * This method is used for bindings where only the **second** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -203,9 +203,9 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Float</code> and returns a <code>Float</code>.
+     * Helper for math methods that take **two** param of type `Float` and returns a `Float`.
      *
-     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     * This method is used for bindings where only the **first** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -219,10 +219,10 @@ public class MathBindingsTestHelper {
 
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a
-     * <code>Double</code>.
+     * Helper for math methods that take **two** param of type `Double` and returns a
+     * `Double`.
      *
-     * This method is used for bindings where <b>both</b> args are observables.
+     * This method is used for bindings where **both** args are observables.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -235,10 +235,10 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a
-     * <code>Double</code>.
+     * Helper for math methods that take **two** param of type `Double` and returns a
+     * `Double`.
      *
-     * This method is used for bindings where only the <b>second</b> argument is an observable.
+     * This method is used for bindings where only the **second** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.
@@ -251,10 +251,10 @@ public class MathBindingsTestHelper {
     }
 
     /**
-     * Helper for math methods that take <b>two</b> param of type <code>Double</code> and returns a
-     * <code>Double</code>.
+     * Helper for math methods that take **two** param of type `Double` and returns a
+     * `Double`.
      *
-     * This method is used for bindings where only the <b>first</b> argument is an observable.
+     * This method is used for bindings where only the **first** argument is an observable.
      *
      * @param bindingFunction a method reference to a binding factory method from {@link
      *                        eu.lestard.advanced_bindings.api.MathBindings}.

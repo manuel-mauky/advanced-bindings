@@ -10,8 +10,8 @@ import java.util.Arrays;
 public class LogicBindings {
 
     /**
-     * A boolean binding that is <code>true</code> only when all dependent observable boolean values
-     * are <code>true</code>.
+     * A boolean binding that is `true` only when all dependent observable boolean values
+     * are `true`.
      *
      * This can be useful in cases where the
      * {@link Bindings#and(javafx.beans.value.ObservableBooleanValue, javafx.beans.value.ObservableBooleanValue)}
@@ -29,8 +29,8 @@ public class LogicBindings {
     }
 
     /**
-     * A boolean binding that is only <code>true</code> when at leased one of the dependent observable boolean values
-     * are <code>true</code>.
+     * A boolean binding that is only `true` when at leased one of the dependent observable boolean values
+     * are `true`.
      *
      * This can be useful in cases where the
      * {@link Bindings#or(javafx.beans.value.ObservableBooleanValue, javafx.beans.value.ObservableBooleanValue)}

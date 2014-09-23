@@ -13,7 +13,7 @@ import javafx.beans.value.ObservableNumberValue;
 public class NumberBindings {
 
     /**
-     * A boolean binding that is <code>true</code> if the given observable double is <b>Not a Number</b>.
+     * A boolean binding that is `true` if the given observable double is **Not a Number**.
      * See {@link Double#isNaN(double)}.
      *
      * @param observableValue the observable double value to use for the binding.
@@ -24,7 +24,7 @@ public class NumberBindings {
     }
 
     /**
-     * A boolean binding that is <code>true</code> if the given observable double is <b>Infinite</b>.
+     * A boolean binding that is `true` if the given observable double is **Infinite**.
      * See {@link Double#isInfinite(double)}.
      *
      * @param observableValue the observable double value to use for the binding.
@@ -124,9 +124,9 @@ public class NumberBindings {
      * A number binding with the division of the two observable number values.
      * The difference to the existing bindings (
      * {@link Bindings#divide(javafx.beans.value.ObservableNumberValue, javafx.beans.value.ObservableNumberValue)})
-     * is that this binding will <b>not</b> throw an {@link java.lang.ArithmeticException} when the second param (the
+     * is that this binding will **not** throw an {@link java.lang.ArithmeticException} when the second param (the
      * divisor)
-     * is zero. Instead an default value of <code>0</code> is returned.
+     * is zero. Instead an default value of `0` is returned.
      *
      * This can be useful because bindings like this aren't working as expected:
      *
@@ -140,16 +140,16 @@ public class NumberBindings {
      *          .otherwise(a.divide(b));
      * </pre>
      *
-     * At first one would expect that this binding will have a value <code>0</code> when <code>b</code> is <code>0</code>.
-     * Instead the binding in the example will throw an {@link java.lang.ArithmeticException} when <code>b</code>
+     * At first one would expect that this binding will have a value `0` when `b` is `0`.
+     * Instead the binding in the example will throw an {@link java.lang.ArithmeticException} when `b`
      * has an (initial) value of 0. The when-otherwise construct doesn't help in this case because
-     * the <code>divide</code> binding will still be evaluated.
+     * the `divide` binding will still be evaluated.
      *
      * In such cases you can use the binding created by this method which makes this distinction internally
      * and won't throw an exception.
      *
      *
-     * If you <code>0</code> isn't suitable as a default value for your use case you can use the overloaded
+     * If you `0` isn't suitable as a default value for your use case you can use the overloaded
      * method {@link #divideSafe(javafx.beans.value.ObservableIntegerValue, javafx.beans.value.ObservableIntegerValue,
      * int)}.
      *
