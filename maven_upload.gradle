@@ -1,0 +1,143 @@
+/*
+ * gradle script to upload archives to maven central and Sonatype OSS
+ *
+ * How to use:
+ * 1. copy the script file in the same directoy like your build.gradle
+ * 2. Embed the script in your build.gradle file underneath(!) your 'group' and 'version' definition with:
+ *      apply from: "maven_upload.gradle"
+ *
+ *   It's important that the group and version information is above the 'apply' line. Otherwise these values aren't
+ *   available in this build script.
+ * 3. Add a gradle.properties file with informations about your project that are used in the generated pom.xml file.
+ *
+ * This script uses the following properties:
+ *
+ * project_name = <your project name>
+ * project_description= <a description of the project>
+ * project_url=<url to the project webpage>
+ * project_scm=<scm link, i.e. 'scm:git@github.com:username/project.git'>
+ * project_license_name= <name of the license>
+ * project_license_url= <url to the license text file>
+ * project_license_distribution=<how the license is distributed, typically 'repo'>
+ * project_developer_name=<the name of the developer>
+ *
+ * 4. Perform a snapshot release with:
+ *      gradle uploadArchives -Psnapshot
+ *
+ * 5. Perform a regular release with:
+ *  gradle uploadArchives -Prelease
+ *
+ */
+
+apply plugin: "maven"
+apply plugin: "signing"
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from "build/docs/javadoc"
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = "sources"
+}
+
+artifacts {
+    archives jar
+
+    archives javadocJar
+    archives sourcesJar
+}
+
+def sonatypeRepositoryUrl
+
+def isDevBuild
+def isSnapshotBuild
+def isReleaseBuild
+
+
+if (hasProperty("release")) {
+    println "release"
+    isReleaseBuild = true
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+} else if (hasProperty("snapshot")) {
+    println "snapshot"
+    isSnapshotBuild = true
+    version += "-SNAPSHOT"
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+} else {
+    println "dev build"
+    isDevBuild = true
+}
+
+//********* artifact signing *********
+if (isReleaseBuild) {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives {
+        // do nothing
+    }
+}
+
+
+uploadArchives {
+    repositories {
+        if (isDevBuild) {
+            mavenLocal()
+        } else {
+            mavenDeployer {
+                if (isReleaseBuild) {
+                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                }
+
+                repository(url: sonatypeRepositoryUrl) {
+                    authentication(userName: sonatypeUsername, password: sonatypePassword)
+                }
+
+                pom.project {
+                    name = project_name
+                    packaging = "jar"
+                    description project_description
+                    url project_url
+
+                    scm {
+                        url project_scm
+                        connection project_scm
+                        developerConnection project_scm
+                    }
+
+                    licenses {
+                        license {
+                            name project_license_name
+                            url project_license_url
+                            distribution project_license_distribution
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id project_developer_name
+                            name project_developer_name
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
+        // Use Java 6's console to read from the console (no good for a CI environment)
+        Console console = System.console()
+        console.printf "\n\nWe have to sign some things in this build.\n\nPlease enter your signing details.\n\n"
+
+        def password = console.readPassword("PGP Private Key Password: ")
+
+        allprojects { ext."signing.password" = password }
+
+        console.printf "\nThanks.\n\n"
+    }
+}
