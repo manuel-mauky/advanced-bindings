@@ -20,4 +20,9 @@ public class CollectionBindings {
     public static NumberBinding sum(final ObservableList<? extends Number> numbers) {
         return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).sum(), numbers);
     }
+
+    @SafeVarargs
+    public static <T> ObservableList<T> concat(ObservableList<T> ... lists) {
+        return null;
+    }
 }

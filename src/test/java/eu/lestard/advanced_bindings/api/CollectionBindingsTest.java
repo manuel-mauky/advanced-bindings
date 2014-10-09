@@ -3,9 +3,11 @@ package eu.lestard.advanced_bindings.api;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static eu.lestard.assertj.javafx.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.*;
 
 public class CollectionBindingsTest {
@@ -72,5 +74,33 @@ public class CollectionBindingsTest {
 
         assertThat(sum).hasValue(87.0);
 
+    }
+
+    @Ignore("todo: implement")
+    @Test
+    public void testConcat(){
+        ObservableList<String> listA = FXCollections.observableArrayList();
+        ObservableList<String> listB = FXCollections.observableArrayList();
+
+        ObservableList<String> concatList =  CollectionBindings.concat(listA, listB);
+
+        assertThat(concatList).isEmpty();
+
+        listA.add("a1");
+        assertThat(concatList).contains("a1");
+
+        listB.add("b3");
+        assertThat(concatList).containsExactly("a1", "b3");
+
+        listB.add("b2");
+        assertThat(concatList).containsExactly("a1", "b3", "b2");
+
+        listA.add("a2");
+        assertThat(concatList).containsExactly("a1", "a2", "b3", "b2");
+
+
+        listA.add("z");
+        listA.add("m");
+        assertThat(concatList).containsExactly("a1", "a2","m", "z", "b2", "b3");
     }
 }
