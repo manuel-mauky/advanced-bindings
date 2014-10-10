@@ -1,7 +1,9 @@
 package eu.lestard.advanced_bindings.api;
 
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -23,6 +25,18 @@ public class CollectionBindings {
 
     @SafeVarargs
     public static <T> ObservableList<T> concat(ObservableList<T> ... lists) {
-        return null;
+        ObservableList<T> result = FXCollections.observableArrayList();
+
+        for (ObservableList<T> list : lists) {
+            list.addListener((Observable observable) -> {
+                result.clear();
+
+                for (ObservableList<T> ts : lists) {
+                    result.addAll(ts);
+                }
+            });
+        }
+
+        return result;
     }
 }
