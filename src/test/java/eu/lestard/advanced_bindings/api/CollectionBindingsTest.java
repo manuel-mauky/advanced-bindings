@@ -76,7 +76,7 @@ public class CollectionBindingsTest {
     }
 
     @Test
-    public void testConcat(){
+    public void testConcatList(){
         ObservableList<String> listA = FXCollections.observableArrayList();
         ObservableList<String> listB = FXCollections.observableArrayList();
 
@@ -99,13 +99,15 @@ public class CollectionBindingsTest {
 
         listA.add("z");
         listA.add("m");
-        assertThat(concatList).containsExactly("a1", "a2","z", "m", "b3", "b2");
+        assertThat(concatList).containsExactly("a1", "a2", "z", "m", "b3", "b2");
 
         listB.remove("b2");
         assertThat(concatList).containsExactly("a1", "a2","z", "m", "b3");
 
         listA.remove("a2");
         assertThat(concatList).containsExactly("a1", "z", "m", "b3");
-    }
 
+        listB.add("m");
+        assertThat(concatList).containsExactly("a1", "z", "m", "b3", "m");
+    }
 }
