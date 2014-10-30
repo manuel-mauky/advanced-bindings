@@ -1,14 +1,9 @@
 package eu.lestard.advanced_bindings.api;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.ObservableNumberValue;
+import javafx.beans.value.*;
 
 public class NumberBindings {
 
@@ -229,4 +224,34 @@ public class NumberBindings {
     public static IntegerBinding divideSafe(ObservableIntegerValue dividend, ObservableIntegerValue divisor, int defaultValue) {
         return divideSafe(dividend, divisor, new SimpleIntegerProperty(defaultValue));
     }
+
+    public static IntegerBinding asInteger(final ObservableValue<Number> source) {
+        return Bindings.createIntegerBinding(()-> nonNullNumber(source.getValue()).intValue(),source);
+    }
+
+    public static DoubleBinding asDouble(final ObservableValue<Number> source) {
+        return Bindings.createDoubleBinding(() -> nonNullNumber(source.getValue()).doubleValue(), source);
+    }
+
+    public static FloatBinding asFloat(final ObservableValue<Number> source) {
+        return Bindings.createFloatBinding(() -> nonNullNumber(source.getValue()).floatValue(), source);
+    }
+
+    public static LongBinding asLong(final ObservableValue<Number> source) {
+        return Bindings.createLongBinding(() -> nonNullNumber(source.getValue()).longValue(), source);
+    }
+
+
+    /**
+     * Helper to prevent {@link java.lang.NullPointerException}. When the given number param is <code>null</code>
+     * this method returns <code>0</code>. Otherwise the given number is returned.
+     */
+    private static Number nonNullNumber(Number number){
+        if(number == null){
+            return 0;
+        }else{
+            return number;
+        }
+    }
+
 }
