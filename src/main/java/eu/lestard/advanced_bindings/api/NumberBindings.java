@@ -225,18 +225,74 @@ public class NumberBindings {
         return divideSafe(dividend, divisor, new SimpleIntegerProperty(defaultValue));
     }
 
+    /**
+     * Converts the given {@link javafx.beans.value.ObservableValue} of type {@link Number}
+     * into an {@link javafx.beans.binding.IntegerBinding}.
+     *
+     * This is done by the {@link Number#intValue()} method.
+     *
+     * This method can be useful in situations where an operation or component only provides an observable value
+     * of type number that you like to use to create calculation bindings.
+     *
+     * It's the like a reverse-method of {@link javafx.beans.binding.IntegerBinding#asObject()}.
+     *
+     * @param source the observable value that will be converted.
+     * @return the IntegerBinding that holds the value of the source observable.
+     */
     public static IntegerBinding asInteger(final ObservableValue<Number> source) {
         return Bindings.createIntegerBinding(()-> nonNullNumber(source.getValue()).intValue(),source);
     }
 
+    /**
+     * Converts the given {@link javafx.beans.value.ObservableValue} of type {@link Number}
+     * into an {@link javafx.beans.binding.DoubleBinding}.
+     *
+     * This is done by the {@link Number#doubleValue()} method.
+     *
+     * This method can be useful in situations where an operation or component only provides an observable value
+     * of type number that you like to use to create calculation bindings.
+     *
+     * It's the like a reverse-method of {@link javafx.beans.binding.DoubleBinding#asObject()}.
+     *
+     * @param source the observable value that will be converted.
+     * @return the DoubleBinding that holds the value of the source observable.
+     */
     public static DoubleBinding asDouble(final ObservableValue<Number> source) {
         return Bindings.createDoubleBinding(() -> nonNullNumber(source.getValue()).doubleValue(), source);
     }
 
+    /**
+     * Converts the given {@link javafx.beans.value.ObservableValue} of type {@link Number}
+     * into an {@link javafx.beans.binding.FloatBinding}.
+     *
+     * This is done by the {@link Number#floatValue()} method.
+     *
+     * This method can be useful in situations where an operation or component only provides an observable value
+     * of type number that you like to use to create calculation bindings.
+     *
+     * It's the like a reverse-method of {@link javafx.beans.binding.FloatBinding#asObject()}.
+     *
+     * @param source the observable value that will be converted.
+     * @return the FloatBinding that holds the value of the source observable.
+     */
     public static FloatBinding asFloat(final ObservableValue<Number> source) {
         return Bindings.createFloatBinding(() -> nonNullNumber(source.getValue()).floatValue(), source);
     }
 
+    /**
+     * Converts the given {@link javafx.beans.value.ObservableValue} of type {@link Number}
+     * into an {@link javafx.beans.binding.LongBinding}.
+     *
+     * This is done by the {@link Number#longValue()} method.
+     *
+     * This method can be useful in situations where an operation or component only provides an observable value
+     * of type number that you like to use to create calculation bindings.
+     *
+     * It's the like a reverse-method of {@link javafx.beans.binding.LongBinding#asObject()}.
+     *
+     * @param source the observable value that will be converted.
+     * @return the LongBinding that holds the value of the source observable.
+     */
     public static LongBinding asLong(final ObservableValue<Number> source) {
         return Bindings.createLongBinding(() -> nonNullNumber(source.getValue()).longValue(), source);
     }
