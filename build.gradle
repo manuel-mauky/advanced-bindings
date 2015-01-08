@@ -30,7 +30,7 @@ dependencies {
     markdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
 
     // testing
-    testCompile "eu.lestard:assertj-javafx:0.2.0"
+    testCompile "eu.lestard:assertj-javafx:0.3.0-SNAPSHOT"
     testCompile "org.assertj:assertj-core:1.6.0"
     testCompile "junit:junit:4.11"
 }
