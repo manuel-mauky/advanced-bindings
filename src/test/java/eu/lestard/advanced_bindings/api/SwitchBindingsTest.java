@@ -2,6 +2,8 @@ package eu.lestard.advanced_bindings.api;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import org.junit.Test;
 
@@ -43,5 +45,29 @@ public class SwitchBindingsTest {
 
         state.setValue(State.D);
         assertThat(binding).hasValue("Default");
+    }
+
+    @Test
+    public void testSwitchWithString(){
+        StringProperty base = new SimpleStringProperty();
+
+        final ObservableValue<Integer> result = SwitchBindings.switchBinding(base, Integer.class)
+                .bindCase("one", s -> 1)
+                .bindCase("two", s -> 2)
+                .bindCase("three", s -> 3)
+                .build();
+
+        assertThat(result).hasNullValue();
+
+        base.setValue("one");
+        assertThat(result).hasValue(1);
+
+
+        base.setValue("three");
+        assertThat(result).hasValue(3);
+
+
+        base.setValue("four");
+        assertThat(result).hasNullValue();
     }
 }
