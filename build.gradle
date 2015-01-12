@@ -8,7 +8,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = "eu.lestard"
-version = "0.3.0"
+version = "0.4.0"
 
 apply from: "maven_upload.gradle"
 
@@ -30,7 +30,7 @@ dependencies {
     markdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
 
     // testing
-    testCompile "eu.lestard:assertj-javafx:0.3.0-SNAPSHOT"
+    testCompile "eu.lestard:assertj-javafx:0.3.0"
     testCompile "org.assertj:assertj-core:1.6.0"
     testCompile "junit:junit:4.11"
 }

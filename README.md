@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/lestard/advanced-bindings.svg?branch=master)](https://travis-ci.org/lestard/advanced-bindings)
 
 
-**advanced-bindings** is a collection of useful helpers and custom binding implementations to simplify the 
+**advanced-bindings** is a collection of useful helpers and custom binding implementations to simplify the
 development of applications that are heavily based on JavaFX's Properties
-and Bindings. 
+and Bindings.
 
 ## Features
 
@@ -100,15 +100,15 @@ public void testMatches(){
     StringProperty text = new SimpleStringProperty();
 
     String pattern = "[0-9]*";  // only numbers are allowed
-    
+
     BooleanBinding matches = StringBindings.matches(text, pattern);
 
 
     text.set("19");
-    
+
     assertThat(matches).isTrue();
-    
-    
+
+
     text.set("no number");
 
     assertThat(matches).isFalse();
@@ -143,13 +143,13 @@ public void testSum(){
 
 ## New Features?
 
-If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](../../issues). 
+If you have ideas for new custom bindings that could be added to the library feel free to add an [issue](../../issues).
 
 ## How to Use
 
-Gradle: 
+Gradle:
 ```groovy
-compile 'eu.lestard:advanced-bindings:0.2.0'
+compile 'eu.lestard:advanced-bindings:0.3.0'
 ```
 
 Maven:
@@ -157,7 +157,7 @@ Maven:
 <dependency>
     <groupId>eu.lestard</groupId>
     <artifactId>advanced-bindings</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -165,4 +165,4 @@ Maven:
 
 ## Links
 
-[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.2.0/)
+[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.3.0/)
