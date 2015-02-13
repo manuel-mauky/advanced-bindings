@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static eu.lestard.assertj.javafx.api.Assertions.*;
 
-public class ObjectBindings_map_Test {
+public class ObjectBindingsTest {
 
     private static class Person{
         private final String name;
@@ -50,6 +50,41 @@ public class ObjectBindings_map_Test {
 
         selectedPerson.set(luke);
         assertThat(name).hasValue("Luke");
+    }
+
+
+    @Test
+    public void testCastBinding(){
+        class Student extends Person {
+            public Student(String name){
+                super(name);
+            }
+        }
+
+
+        ObjectProperty<Student> studentProperty = new SimpleObjectProperty<>();
+
+        ObjectBinding<Person> person = ObjectBindings.cast(studentProperty);
+
+        assertThat(person).hasNullValue();
+
+
+        Student student = new Student("luke");
+        studentProperty.set(student);
+
+        assertThat(person).hasValue(student);
+    }
+
+    @Test
+    public void testCastBinding2(){
+        ObjectProperty<Double> doubleProperty = new SimpleObjectProperty<>(10.0);
+
+        ObjectBinding<Number> numberBinding = ObjectBindings.cast(doubleProperty);
+
+        assertThat(numberBinding).hasValue(10.0);
+
+        doubleProperty.setValue(12.34);
+        assertThat(numberBinding).hasValue(12.34);
     }
 
 }

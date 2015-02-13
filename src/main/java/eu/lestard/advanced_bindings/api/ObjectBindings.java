@@ -95,4 +95,7 @@ public class ObjectBindings {
         }, source);
     }
 
+    public static <T, S extends T> ObjectBinding<T> cast(final ObservableValue<S> source) {
+        return Bindings.createObjectBinding(source::getValue, source);
+    }
 }
