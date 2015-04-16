@@ -2,7 +2,7 @@ package eu.lestard.advanced_bindings.api;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 
 /**
  * This class contains custom binding implementations for Strings.
@@ -18,9 +18,9 @@ public class StringBindings {
      * @param pattern the RegExp pattern that is used.
      * @return a boolean binding instance.
      */
-    public static BooleanBinding matches(final ObservableStringValue text, final String pattern) {
+    public static BooleanBinding matches(final ObservableValue<String> text, final String pattern) {
         return Bindings.createBooleanBinding(()->{
-            final String textToVerify = text.get();
+            final String textToVerify = text.getValue();
             return textToVerify != null && textToVerify.matches(pattern);
         }, text);
     }
@@ -33,10 +33,10 @@ public class StringBindings {
      * @param pattern the observable string with the RegExp pattern that is used.
      * @return a boolean binding instance.
      */
-    public static BooleanBinding matches(final ObservableStringValue text, final ObservableStringValue pattern) {
+    public static BooleanBinding matches(final ObservableValue<String> text, final ObservableValue<String> pattern) {
         return Bindings.createBooleanBinding(()->{
-            final String textToVerify = text.get();
-            final String patternString = pattern.get();
+            final String textToVerify = text.getValue();
+            final String patternString = pattern.getValue();
 
             return textToVerify != null && patternString != null && textToVerify.matches(patternString);
         }, text, pattern);
