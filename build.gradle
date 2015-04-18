@@ -8,7 +8,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = "eu.lestard"
-version = "0.4.0"
+version = "0.5.0"
 
 apply from: "maven_upload.gradle"
 

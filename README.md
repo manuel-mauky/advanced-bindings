@@ -149,7 +149,7 @@ If you have ideas for new custom bindings that could be added to the library fee
 
 Gradle:
 ```groovy
-compile 'eu.lestard:advanced-bindings:0.3.0'
+compile 'eu.lestard:advanced-bindings:0.4.0'
 ```
 
 Maven:
@@ -157,7 +157,7 @@ Maven:
 <dependency>
     <groupId>eu.lestard</groupId>
     <artifactId>advanced-bindings</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
@@ -165,4 +165,4 @@ Maven:
 
 ## Links
 
-[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.3.0/)
+[JavaDoc](https://lestard.github.io/advanced-bindings/javadoc/0.4.0/)
