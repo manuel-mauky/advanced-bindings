@@ -125,15 +125,15 @@ public class NumberBindings {
      *
      * This can be useful because bindings like this aren't working as expected:
      *
-     * <pre>
-     *     IntegerProperty a = ...;
-     *     IntegerProperty b = ...;
+     * ```java
+     * IntegerProperty a = ...;
+     * IntegerProperty b = ...;
      *
-     *     NumberBinding result = Bindings
-     *          .when(b.isEqualTo(0))
-     *          .then(0)
-     *          .otherwise(a.divide(b));
-     * </pre>
+     * NumberBinding result = Bindings
+     *      .when(b.isEqualTo(0))
+     *      .then(0)
+     *      .otherwise(a.divide(b));
+     * ```
      *
      * At first one would expect that this binding will have a value `0` when `b` is `0`.
      * Instead the binding in the example will throw an {@link java.lang.ArithmeticException} when `b`

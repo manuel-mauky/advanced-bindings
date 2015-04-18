@@ -95,6 +95,57 @@ public class ObjectBindings {
         }, source);
     }
 
+    /**
+     * Creates a binding that contains the same value as the source observable
+     * but casted to a type that is higher in class hierarchy.
+     *
+     * Example:
+     *
+     * ```java
+     * public class Person {
+     * }
+     *
+     * public class Student extends Person {
+     * }
+     *
+     *
+     * ObjectProperty<Student> student = new SimpleObjectProperty<>();
+     *
+     * ObjectBinding<Person> person = ObjectBindings.cast(student);
+     * ```
+     *
+     * This can be useful for cases when a method needs an observable value of the base type as argument
+     * but you have only an observable of a more specific type.
+     * The reason is that there is no implicit type conversion.
+     *
+     * See another example:
+     *
+     * ```java
+     * public void calculate(ObservableValue<Number> value) {
+     *     ...
+     * }
+     *
+     *  ...
+     *
+     * ChoiceBox<Integer> choiceBox = new ChoiceBox<>();
+     * choiceBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4));
+     *
+     * ObjectProperty<Integer> value = choiceBox.valueProperty();
+     *
+     * calculate(value) // compile error
+     *
+     * calculate(ObjectBindings.cast(value)); // this works
+     * ```
+     *
+     * While `Integer` can be implicitly casted to `Number` the same isn't possible
+     * from `ObservableValue<Integer>` to `ObservableValue<Number>`.
+     * For such use cases you can use this method.
+     *
+     * @param source the observable value that will be used as source.
+     * @param <T> the generic type of target binding.
+     * @param <S> the generic type of the source binding.
+     * @return an ObjectBinding that will contain the same value of the source but casted to another type.
+     */
     public static <T, S extends T> ObjectBinding<T> cast(final ObservableValue<S> source) {
         return Bindings.createObjectBinding(source::getValue, source);
     }
