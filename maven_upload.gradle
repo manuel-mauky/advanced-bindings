@@ -2,7 +2,7 @@
  * gradle script to upload archives to maven central and Sonatype OSS
  *
  * How to use:
- * 1. copy the script file in the same directoy like your build.gradle
+ * 1. copy the script file in the same directory like your build.gradle
  * 2. Embed the script in your build.gradle file underneath(!) your 'group' and 'version' definition with:
  *      apply from: "maven_upload.gradle"
  *
@@ -12,20 +12,34 @@
  *
  * This script uses the following properties:
  *
- * project_name = <your project name>
- * project_description= <a description of the project>
- * project_url=<url to the project webpage>
- * project_scm=<scm link, i.e. 'scm:git@github.com:username/project.git'>
- * project_license_name= <name of the license>
- * project_license_url= <url to the license text file>
- * project_license_distribution=<how the license is distributed, typically 'repo'>
- * project_developer_name=<the name of the developer>
+ *      project_name = <your project name>
+ *      project_description= <a description of the project>
+ *      project_url=<url to the project webpage>
+ *      project_scm=<scm link, i.e. 'scm:git@github.com:username/project.git'>
+ *      project_license_name= <name of the license>
+ *      project_license_url= <url to the license text file>
+ *      project_license_distribution=<how the license is distributed, typically 'repo'>
+ *      project_developer_name=<the name of the developer>
+ *     
+ * 4. Configure sonatype repository credentials: Add the following properties to your ~/.gradle/gradle.properties file. 
+ * 
+ *      sonatypeUsername=YOUR USERNAME
+ *      sonatypePassword=YOUR PASSWORD
+ * 
+ * This may <b>not</b> be added to the projects gradle.properties file because these are your private user credentials
+ * that you don't want to be visible by the public.
+ * 
+ * Additionally we need to configure (again in ~/.gradle/gradle.properties) your GnuPG key that is used to sign the artifacts when you publish a release.
+ * 
+ *      signing.keyId=<your key id>
+ *      signing.secretKeyRingFile=<path to keyring> # f.e. /home/superman/.gnupg/secring.gpg
+ * 
  *
- * 4. Perform a snapshot release with:
+ * 5. Perform a snapshot release with:
  *      gradle uploadArchives -Psnapshot
  *
- * 5. Perform a regular release with:
- *  gradle uploadArchives -Prelease
+ * 6. Perform a regular release with:
+ *      gradle uploadArchives -Prelease
  *
  */
 
