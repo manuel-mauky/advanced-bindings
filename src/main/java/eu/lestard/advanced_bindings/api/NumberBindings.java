@@ -40,7 +40,7 @@ public class NumberBindings {
      * @param divisor      the observable value used as divisor
      * @return the resulting number binding
      */
-    public static NumberBinding divideSafe(ObservableNumberValue dividend, ObservableNumberValue divisor) {
+    public static NumberBinding divideSafe(ObservableValue<Number> dividend, ObservableValue<Number> divisor) {
         return divideSafe(dividend, divisor, new SimpleDoubleProperty(0));
     }
 
@@ -55,7 +55,7 @@ public class NumberBindings {
      * @param divisor      the observable value used as divisor
      * @return the resulting number binding
      */
-    public static NumberBinding divideSafe(double dividend, ObservableNumberValue divisor) {
+    public static NumberBinding divideSafe(double dividend, ObservableValue<Number> divisor) {
         return divideSafe(new SimpleDoubleProperty(dividend), divisor);
     }
 
@@ -70,7 +70,7 @@ public class NumberBindings {
      * @param divisor      the value used as divisor
      * @return the resulting number binding
      */
-    public static NumberBinding divideSafe(ObservableNumberValue dividend, double divisor) {
+    public static NumberBinding divideSafe(ObservableValue<Number> dividend, double divisor) {
         return divideSafe(dividend, new SimpleDoubleProperty(divisor));
     }
 
@@ -86,13 +86,13 @@ public class NumberBindings {
      *                     division by zero happens.
      * @return the resulting number binding
      */
-    public static NumberBinding divideSafe(ObservableNumberValue dividend, ObservableNumberValue divisor, ObservableNumberValue defaultValue) {
+    public static NumberBinding divideSafe(ObservableValue<Number> dividend, ObservableValue<Number> divisor, ObservableValue<Number> defaultValue) {
         return Bindings.createDoubleBinding(() -> {
 
-            if (divisor.doubleValue() == 0) {
-                return defaultValue.doubleValue();
+            if (divisor.getValue().doubleValue() == 0) {
+                return defaultValue.getValue().doubleValue();
             } else {
-                return dividend.doubleValue() / divisor.doubleValue();
+                return dividend.getValue().doubleValue() / divisor.getValue().doubleValue();
             }
 
         }, dividend, divisor);
@@ -110,7 +110,7 @@ public class NumberBindings {
      *                     division by zero happens.
      * @return the resulting number binding
      */
-    public static NumberBinding divideSafe(ObservableNumberValue dividend, ObservableNumberValue divisor, double defaultValue) {
+    public static NumberBinding divideSafe(ObservableValue<Number> dividend, ObservableValue<Number> divisor, double defaultValue) {
         return divideSafe(dividend, divisor, new SimpleDoubleProperty(defaultValue));
     }
 

@@ -2,7 +2,7 @@ package eu.lestard.advanced_bindings.api;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
 
 import java.util.Arrays;
 
@@ -20,10 +20,11 @@ public class LogicBindings {
      * @param values variable number of observable boolean values that are used for the binding
      * @return the boolean binding
      */
-    public static BooleanBinding and(ObservableBooleanValue...values) {
+    @SafeVarargs
+    public static BooleanBinding and(ObservableValue<Boolean>...values) {
         return Bindings.createBooleanBinding(
             ()-> !Arrays.stream(values)
-                .filter(observable -> !observable.get())
+                .filter(observable -> !observable.getValue())
                 .findAny()
                 .isPresent(), values);
     }
@@ -39,9 +40,10 @@ public class LogicBindings {
      * @param values variable number of observable boolean values that are used for the binding
      * @return the boolean binding
      */
-    public static BooleanBinding or(ObservableBooleanValue...values) {
+    @SafeVarargs
+    public static BooleanBinding or(ObservableValue<Boolean>...values) {
         return Bindings.createBooleanBinding(()-> Arrays.stream(values)
-            .filter(ObservableBooleanValue::get)
+            .filter(ObservableValue::getValue)
             .findAny()
             .isPresent(), values);
     }
