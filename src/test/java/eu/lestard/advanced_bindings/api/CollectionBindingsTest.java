@@ -234,4 +234,184 @@ public class CollectionBindingsTest {
 
         assertThat(result).hasValue("n=34");
     }
+
+    @Test
+    public void testMinOfIntegerCollection() {
+        ObservableList<Integer> numbers = FXCollections.observableArrayList();
+        NumberBinding min = CollectionBindings.min(numbers, 0);
+        assertThat(min).hasValue(0.0);
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(min).hasValue(1.0);
+
+        numbers.remove(0);
+
+        assertThat(min).hasValue(2.0);
+    }
+
+    @Test
+    public void testMinOfLongCollection() {
+        ObservableList<Long> numbers = FXCollections.observableArrayList();
+        NumberBinding min = CollectionBindings.min(numbers, 0);
+        assertThat(min).hasValue(0.0);
+
+        numbers.addAll(1L, 2L, 3L, 5L, 8L, 13L, 21L);
+
+        assertThat(min).hasValue(1.0);
+
+        numbers.remove(0);
+
+        assertThat(min).hasValue(2.0);
+    }
+
+    @Test
+    public void testMinOfFloatCollection() {
+        ObservableList<Float> numbers = FXCollections.observableArrayList();
+        NumberBinding min = CollectionBindings.min(numbers, 0);
+        assertThat(min).hasValue(0.0);
+
+        numbers.addAll(1f, 2f, 3f, 5f, 8f, 13f, 21f);
+
+        assertThat(min).hasValue(1.0);
+
+        numbers.remove(0);
+
+        assertThat(min).hasValue(2.0);
+    }
+
+    @Test
+    public void testMinOfDoubleCollection() {
+        ObservableList<Double> numbers = FXCollections.observableArrayList();
+        NumberBinding min = CollectionBindings.min(numbers, 0);
+        assertThat(min).hasValue(0.0);
+
+        numbers.addAll(1d, 2d, 3d, 5d, 8d, 13d, 21d);
+
+        assertThat(min).hasValue(1.0);
+
+        numbers.remove(0);
+
+        assertThat(min).hasValue(2.0);
+    }
+
+    @Test
+    public void testMaxOfIntegerCollection() {
+        ObservableList<Integer> numbers = FXCollections.observableArrayList();
+        NumberBinding max = CollectionBindings.max(numbers, 0);
+        assertThat(max).hasValue(0.0);
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(max).hasValue(21.0);
+
+        numbers.add(34);
+
+        assertThat(max).hasValue(34.0);
+    }
+
+    @Test
+    public void testMaxOfLongCollection() {
+        ObservableList<Long> numbers = FXCollections.observableArrayList();
+        NumberBinding max = CollectionBindings.max(numbers, 0);
+        assertThat(max).hasValue(0.0);
+
+        numbers.addAll(1L, 2L, 3L, 5L, 8L, 13L, 21L);
+
+        assertThat(max).hasValue(21.0);
+
+        numbers.add(34L);
+
+        assertThat(max).hasValue(34.0);
+    }
+
+    @Test
+    public void testMaxOfFloatCollection() {
+        ObservableList<Float> numbers = FXCollections.observableArrayList();
+        NumberBinding max = CollectionBindings.max(numbers, 0);
+        assertThat(max).hasValue(0.0);
+
+        numbers.addAll(1f, 2f, 3f, 5f, 8f, 13f, 21f);
+
+        assertThat(max).hasValue(21.0);
+
+        numbers.add(34f);
+
+        assertThat(max).hasValue(34.0);
+    }
+
+    @Test
+    public void testMaxOfDoubleCollection() {
+        ObservableList<Double> numbers = FXCollections.observableArrayList();
+        NumberBinding max = CollectionBindings.max(numbers, 0);
+        assertThat(max).hasValue(0.0);
+
+        numbers.addAll(1d, 2d, 3d, 5d, 8d, 13d, 21d);
+
+        assertThat(max).hasValue(21.0);
+
+        numbers.add(34d);
+
+        assertThat(max).hasValue(34.0);
+    }
+
+    @Test
+    public void testAverageOfIntegerCollection() {
+        ObservableList<Integer> numbers = FXCollections.observableArrayList();
+        NumberBinding average = CollectionBindings.average(numbers, 0);
+        assertThat(average).hasValue(0.0);
+
+        numbers.addAll(1, 2, 3, 5, 10, 21);
+
+        assertThat(average).hasValue(7.0);
+
+        numbers.add(42);
+
+        assertThat(average).hasValue(12.0);
+    }
+
+    @Test
+    public void testAverageOfLongCollection() {
+        ObservableList<Long> numbers = FXCollections.observableArrayList();
+        NumberBinding average = CollectionBindings.average(numbers, 0);
+        assertThat(average).hasValue(0.0);
+
+        numbers.addAll(1L, 2L, 3L, 5L, 10L, 21L);
+
+        assertThat(average).hasValue(7.0);
+
+        numbers.add(42L);
+
+        assertThat(average).hasValue(12.0);
+    }
+
+    @Test
+    public void testAverageOfFloatCollection() {
+        ObservableList<Float> numbers = FXCollections.observableArrayList();
+        NumberBinding average = CollectionBindings.average(numbers, 0);
+        assertThat(average).hasValue(0.0);
+
+        numbers.addAll(1f, 2f, 3f, 5f, 10f, 21f);
+
+        assertThat(average).hasValue(7.0);
+
+        numbers.add(42f);
+
+        assertThat(average).hasValue(12.0);
+    }
+
+    @Test
+    public void testAverageOfDoubleCollection() {
+        ObservableList<Double> numbers = FXCollections.observableArrayList();
+        NumberBinding average = CollectionBindings.average(numbers, 0);
+        assertThat(average).hasValue(0.0);
+
+        numbers.addAll(1d, 2d, 3d, 5d, 10d, 21d);
+
+        assertThat(average).hasValue(7.0);
+
+        numbers.add(42d);
+
+        assertThat(average).hasValue(12.0);
+    }
 }

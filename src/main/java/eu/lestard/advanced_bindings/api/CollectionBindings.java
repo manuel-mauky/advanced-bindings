@@ -18,13 +18,86 @@ import java.util.stream.Collectors;
  * This class contains custom binding implementations for collections.
  *
  * @author manuel mauky
+ * @author andres almiray
  */
 public class CollectionBindings {
+    /**
+     * Creates a number binding that computes the minimum value amongst elements.
+     *
+     * @param numbers      the observable list of numbers.
+     * @param defaultValue the value to be returned if there is no value present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding min(final ObservableList<? extends Number> numbers, final Number defaultValue) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).min().orElse(defaultValue.doubleValue()), numbers);
+    }
+
+    /**
+     * Creates a number binding that computes the minimum value amongst elements.
+     *
+     * @param numbers  the observable list of numbers.
+     * @param supplier a {@code Supplier} whose result is returned if no value is present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding min(final ObservableList<? extends Number> numbers, final Supplier<? extends Number> supplier) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).min().orElse(supplier.get().doubleValue()), numbers);
+    }
+
+    /**
+     * Creates a number binding that computes the maximum value amongst elements.
+     *
+     * @param numbers      the observable list of numbers.
+     * @param defaultValue the value to be returned if there is no value present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding max(final ObservableList<? extends Number> numbers, final Number defaultValue) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).max().orElse(defaultValue.doubleValue()), numbers);
+    }
+
+    /**
+     * Creates a number binding that computes the maximum value amongst elements.
+     *
+     * @param numbers  the observable list of numbers.
+     * @param supplier a {@code Supplier} whose result is returned if no value is present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding max(final ObservableList<? extends Number> numbers, final Supplier<? extends Number> supplier) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).max().orElse(supplier.get().doubleValue()), numbers);
+    }
+
+    /**
+     * Creates a number binding that computes the average value amongst elements.
+     *
+     * @param numbers      the observable list of numbers.
+     * @param defaultValue the value to be returned if there is no value present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding average(final ObservableList<? extends Number> numbers, final Number defaultValue) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).average().orElse(defaultValue.doubleValue()), numbers);
+    }
+
+    /**
+     * Creates a number binding that computes the average value amongst elements.
+     *
+     * @param numbers  the observable list of numbers.
+     * @param supplier a {@code Supplier} whose result is returned if no value is present.
+     *
+     * @return a number binding
+     */
+    public static NumberBinding average(final ObservableList<? extends Number> numbers, final Supplier<? extends Number> supplier) {
+        return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).average().orElse(supplier.get().doubleValue()), numbers);
+    }
 
     /**
      * Creates a number binding that contains the sum of the numbers of the given observable list of numbers.
      *
      * @param numbers the observable list of numbers.
+     *
      * @return a number binding.
      */
     public static NumberBinding sum(final ObservableList<? extends Number> numbers) {
@@ -34,8 +107,9 @@ public class CollectionBindings {
     /**
      * Creates a string binding that constructs a sequence of characters separated by a delimiter.
      *
-     * @param items the observable list of items.
+     * @param items     the observable list of items.
      * @param delimiter the sequence of characters to be used between each element.
+     *
      * @return a string binding.
      */
     public static StringBinding join(final ObservableList<?> items, final ObservableValue<String> delimiter) {
@@ -46,8 +120,8 @@ public class CollectionBindings {
      * Returns an object binding whose value is the reduction of all elements in the list.
      *
      * @param items        the observable list of elements.
-     * @param defaultValue the value to be returned if there is no value present, may be null
-     * @param reducer      an associative, non-interfering, stateless function for combining two values
+     * @param defaultValue the value to be returned if there is no value present, may be null.
+     * @param reducer      an associative, non-interfering, stateless function for combining two values.
      *
      * @return an object binding
      */
@@ -59,8 +133,8 @@ public class CollectionBindings {
      * Returns an object binding whose value is the reduction of all elements in the list.
      *
      * @param items    the observable list of elements.
-     * @param reducer  an associative, non-interfering, stateless function for combining two values
-     * @param supplier a {@code Supplier} whose result is returned if no value is present
+     * @param reducer  an associative, non-interfering, stateless function for combining two values.
+     * @param supplier a {@code Supplier} whose result is returned if no value is present.
      *
      * @return an object binding
      */
@@ -72,9 +146,9 @@ public class CollectionBindings {
      * Returns an object binding whose value is the mapped reduction of all elements in the list.
      *
      * @param items        the observable list of elements.
-     * @param defaultValue the value to be returned if there is no value present, may be null
-     * @param reducer      an associative, non-interfering, stateless function for combining two values
-     * @param mapper       a non-interfering, stateless function to apply to the reduced value
+     * @param defaultValue the value to be returned if there is no value present, may be null.
+     * @param reducer      an associative, non-interfering, stateless function for combining two values.
+     * @param mapper       a non-interfering, stateless function to apply to the reduced value.
      *
      * @return an object binding
      */
@@ -86,9 +160,9 @@ public class CollectionBindings {
      * Returns an object binding whose value is the mapped reduction of all elements in the list.
      *
      * @param items    the observable list of elements.
-     * @param reducer  an associative, non-interfering, stateless function for combining two values
-     * @param supplier a {@code Supplier} whose result is returned if no value is present
-     * @param mapper   a non-interfering, stateless function to apply to the reduced value
+     * @param reducer  an associative, non-interfering, stateless function for combining two values.
+     * @param supplier a {@code Supplier} whose result is returned if no value is present.
+     * @param mapper   a non-interfering, stateless function to apply to the reduced value.
      *
      * @return an object binding
      */
@@ -113,13 +187,13 @@ public class CollectionBindings {
      *
      * This behaviour will likely be changed in the future as it means a performance limitation too.
      *
-     *
      * @param lists a var-args array of observable lists.
-     * @param <T> the generic type of the lists.
+     * @param <T>   the generic type of the lists.
+     *
      * @return a new observable list representing the concatenation of the source lists.
      */
     @SafeVarargs
-    public static <T> ObservableList<T> concat(ObservableList<T> ... lists) {
+    public static <T> ObservableList<T> concat(ObservableList<T>... lists) {
         ObservableList<T> result = FXCollections.observableArrayList();
 
         // todo: think about a smarter solution
