@@ -3,11 +3,15 @@ package eu.lestard.advanced_bindings.api;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -29,12 +33,67 @@ public class CollectionBindings {
 
     /**
      * Creates a string binding that constructs a sequence of characters separated by a delimiter.
+     *
      * @param items the observable list of items.
      * @param delimiter the sequence of characters to be used between each element.
      * @return a string binding.
      */
     public static StringBinding join(final ObservableList<?> items, final ObservableValue<String> delimiter) {
         return Bindings.createStringBinding(() -> items.stream().map(String::valueOf).collect(Collectors.joining(delimiter.getValue())), items, delimiter);
+    }
+
+    /**
+     * Returns an object binding whose value is the reduction of all elements in the list.
+     *
+     * @param items        the observable list of elements.
+     * @param defaultValue the value to be returned if there is no value present, may be null
+     * @param reducer      an associative, non-interfering, stateless function for combining two values
+     *
+     * @return an object binding
+     */
+    public static <T> ObjectBinding<T> reducing(final ObservableList<T> items, final T defaultValue, final ObservableValue<BinaryOperator<T>> reducer) {
+        return Bindings.createObjectBinding(() -> items.stream().reduce(reducer.getValue()).orElse(defaultValue), items, reducer);
+    }
+
+    /**
+     * Returns an object binding whose value is the reduction of all elements in the list.
+     *
+     * @param items    the observable list of elements.
+     * @param reducer  an associative, non-interfering, stateless function for combining two values
+     * @param supplier a {@code Supplier} whose result is returned if no value is present
+     *
+     * @return an object binding
+     */
+    public static <T> ObjectBinding<T> reducing(final ObservableList<T> items, final ObservableValue<BinaryOperator<T>> reducer, final Supplier<T> supplier) {
+        return Bindings.createObjectBinding(() -> items.stream().reduce(reducer.getValue()).orElseGet(supplier), items, reducer);
+    }
+
+    /**
+     * Returns an object binding whose value is the mapped reduction of all elements in the list.
+     *
+     * @param items        the observable list of elements.
+     * @param defaultValue the value to be returned if there is no value present, may be null
+     * @param reducer      an associative, non-interfering, stateless function for combining two values
+     * @param mapper       a non-interfering, stateless function to apply to the reduced value
+     *
+     * @return an object binding
+     */
+    public static <T, R> ObjectBinding<R> reduceAndMap(final ObservableList<T> items, final T defaultValue, final ObservableValue<BinaryOperator<T>> reducer, final ObservableValue<Function<T, R>> mapper) {
+        return Bindings.createObjectBinding(() -> mapper.getValue().apply(items.stream().reduce(reducer.getValue()).orElse(defaultValue)), items, reducer, mapper);
+    }
+
+    /**
+     * Returns an object binding whose value is the mapped reduction of all elements in the list.
+     *
+     * @param items    the observable list of elements.
+     * @param reducer  an associative, non-interfering, stateless function for combining two values
+     * @param supplier a {@code Supplier} whose result is returned if no value is present
+     * @param mapper   a non-interfering, stateless function to apply to the reduced value
+     *
+     * @return an object binding
+     */
+    public static <T, R> ObjectBinding<R> reduceAndMap(final ObservableList<T> items, final ObservableValue<BinaryOperator<T>> reducer, final ObservableValue<Function<T, R>> mapper, final Supplier<T> supplier) {
+        return Bindings.createObjectBinding(() -> mapper.getValue().apply(items.stream().reduce(reducer.getValue()).orElseGet(supplier)), items, reducer, mapper);
     }
 
     /**
@@ -48,7 +107,7 @@ public class CollectionBindings {
      *
      *
      * **Hint:** *At the moment this observable list is implemented with {@link javafx.beans.InvalidationListener}s on
-     * the source lists and by clearing and recreating the concatenated list on every change. This should be keeped in mind
+     * the source lists and by clearing and recreating the concatenated list on every change. This should be kept in mind
      * when using a {@link javafx.collections.ListChangeListener} on the concatenated list as it will react multiple times
      * when a change is done to one of the source lists.
      *

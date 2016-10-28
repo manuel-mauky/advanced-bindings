@@ -1,17 +1,22 @@
 package eu.lestard.advanced_bindings.api;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.binding.StringBinding;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.Test;
 
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
 import static eu.lestard.assertj.javafx.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.offset;
 
 public class CollectionBindingsTest {
 
@@ -80,11 +85,11 @@ public class CollectionBindingsTest {
     }
 
     @Test
-    public void testConcatList(){
+    public void testConcatList() {
         ObservableList<String> listA = FXCollections.observableArrayList();
         ObservableList<String> listB = FXCollections.observableArrayList();
 
-        ObservableList<String> concatList =  CollectionBindings.concat(listA, listB);
+        ObservableList<String> concatList = CollectionBindings.concat(listA, listB);
 
         assertThat(concatList).isEmpty();
 
@@ -106,7 +111,7 @@ public class CollectionBindingsTest {
         assertThat(concatList).containsExactly("a1", "a2", "z", "m", "b3", "b2");
 
         listB.remove("b2");
-        assertThat(concatList).containsExactly("a1", "a2","z", "m", "b3");
+        assertThat(concatList).containsExactly("a1", "a2", "z", "m", "b3");
 
         listA.remove("a2");
         assertThat(concatList).containsExactly("a1", "z", "m", "b3");
@@ -134,5 +139,99 @@ public class CollectionBindingsTest {
 
         delimiter.set(":");
         assertThat(joined.get()).isEqualTo("A:1:interface java.lang.Runnable");
+    }
+
+    @Test
+    public void testReducingListWithDefaultValue() {
+        ObservableList<Number> numbers = FXCollections.observableArrayList();
+        ObjectProperty<BinaryOperator<Number>> reducer = new SimpleObjectProperty<>((n1, n2) -> n1.intValue() + n2.intValue());
+        ObjectBinding<Number> result = CollectionBindings.reducing(numbers, 0, reducer);
+
+        assertThat(result).hasValue(0);
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(result).hasValue(53);
+
+        numbers.add(34);
+
+        assertThat(result).hasValue(87);
+
+        reducer.set((n1, n2) -> n2.intValue());
+
+        assertThat(result).hasValue(34);
+    }
+
+    @Test
+    public void testReducingListWithSupplier() {
+        ObservableList<Number> numbers = FXCollections.observableArrayList();
+        ObjectProperty<BinaryOperator<Number>> reducer = new SimpleObjectProperty<>((n1, n2) -> n1.intValue() + n2.intValue());
+        ObjectBinding<Number> result = CollectionBindings.reducing(numbers, reducer, () -> 0);
+
+        assertThat(result).hasValue(0);
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(result).hasValue(53);
+
+        numbers.add(34);
+
+        assertThat(result).hasValue(87);
+
+        reducer.set((n1, n2) -> n2.intValue());
+
+        assertThat(result).hasValue(34);
+    }
+
+    @Test
+    public void testReduceAndMapListWithDefaultValue() {
+        ObservableList<Number> numbers = FXCollections.observableArrayList();
+        ObjectProperty<BinaryOperator<Number>> reducer = new SimpleObjectProperty<>((n1, n2) -> n1.intValue() + n2.intValue());
+        ObjectProperty<Function<Number, String>> mapper = new SimpleObjectProperty<>(String::valueOf);
+        ObjectBinding<String> result = CollectionBindings.reduceAndMap(numbers, 0, reducer, mapper);
+
+        assertThat(result).hasValue("0");
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(result).hasValue("53");
+
+        numbers.add(34);
+
+        assertThat(result).hasValue("87");
+
+        reducer.set((n1, n2) -> n2.intValue());
+
+        assertThat(result).hasValue("34");
+
+        mapper.set(n -> "n=" + n);
+
+        assertThat(result).hasValue("n=34");
+    }
+
+    @Test
+    public void testReduceAndMapListWithSupplier() {
+        ObservableList<Number> numbers = FXCollections.observableArrayList();
+        ObjectProperty<BinaryOperator<Number>> reducer = new SimpleObjectProperty<>((n1, n2) -> n1.intValue() + n2.intValue());
+        ObjectProperty<Function<Number, String>> mapper = new SimpleObjectProperty<>(String::valueOf);
+        ObjectBinding<String> result = CollectionBindings.reduceAndMap(numbers, reducer, mapper, () -> 0);
+
+        assertThat(result).hasValue("0");
+
+        numbers.addAll(1, 2, 3, 5, 8, 13, 21);
+
+        assertThat(result).hasValue("53");
+
+        numbers.add(34);
+
+        assertThat(result).hasValue("87");
+
+        reducer.set((n1, n2) -> n2.intValue());
+
+        assertThat(result).hasValue("34");
+
+        mapper.set(n -> "n=" + n);
+
+        assertThat(result).hasValue("n=34");
     }
 }
