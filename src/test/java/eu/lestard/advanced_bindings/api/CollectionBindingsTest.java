@@ -1,6 +1,10 @@
 package eu.lestard.advanced_bindings.api;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.Test;
@@ -109,5 +113,26 @@ public class CollectionBindingsTest {
 
         listB.add("m");
         assertThat(concatList).containsExactly("a1", "z", "m", "b3", "m");
+    }
+
+    @Test
+    public void testJoinList() {
+        ObservableList<Object> items = FXCollections.observableArrayList();
+        StringProperty delimiter = new SimpleStringProperty(", ");
+        StringBinding joined = CollectionBindings.join(items, delimiter);
+
+        assertThat(joined.get()).isEqualTo("");
+
+        items.add("A");
+        assertThat(joined.get()).isEqualTo("A");
+
+        items.add(1);
+        assertThat(joined.get()).isEqualTo("A, 1");
+
+        items.add(Runnable.class);
+        assertThat(joined.get()).isEqualTo("A, 1, interface java.lang.Runnable");
+
+        delimiter.set(":");
+        assertThat(joined.get()).isEqualTo("A:1:interface java.lang.Runnable");
     }
 }

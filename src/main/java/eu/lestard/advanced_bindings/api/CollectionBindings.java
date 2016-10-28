@@ -3,8 +3,12 @@ package eu.lestard.advanced_bindings.api;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.stream.Collectors;
 
 /**
  * This class contains custom binding implementations for collections.
@@ -21,6 +25,16 @@ public class CollectionBindings {
      */
     public static NumberBinding sum(final ObservableList<? extends Number> numbers) {
         return Bindings.createDoubleBinding(() -> numbers.stream().mapToDouble(Number::doubleValue).sum(), numbers);
+    }
+
+    /**
+     * Creates a string binding that constructs a sequence of characters separated by a delimiter.
+     * @param items the observable list of items.
+     * @param delimiter the sequence of characters to be used between each element.
+     * @return a string binding.
+     */
+    public static StringBinding join(final ObservableList<?> items, final ObservableValue<String> delimiter) {
+        return Bindings.createStringBinding(() -> items.stream().map(String::valueOf).collect(Collectors.joining(delimiter.getValue())), items, delimiter);
     }
 
     /**
