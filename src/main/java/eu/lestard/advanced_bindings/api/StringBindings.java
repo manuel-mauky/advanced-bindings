@@ -6,9 +6,13 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ObservableValue;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * This class contains custom binding implementations for Strings.
+ *
+ * @author manuel mauky
+ * @author andres almiray
  */
 public class StringBindings {
 	
@@ -176,5 +180,48 @@ public class StringBindings {
 			
 			return text.getValue() == null ? "" : text.getValue().toUpperCase(localeValue);
 		}, text, locale);
+	}
+
+	/**
+	 * Creates a string binding that contains the value of the given observable string transformed using the supplied
+	 * function.
+	 *
+	 * If the given observable string has a value of `null` the created binding will contain an empty string.
+	 *
+	 * If the given function has a value of `null` {@link Function#identity()} will be used instead.
+	 *
+	 * @param text
+	 *            the source string that will used for the conversion.
+	 * @param transformer
+	 *            a non-interfering, stateless function to apply to the source string.
+	 * @return a binding containing the transformed string.
+	 */
+	public static StringBinding transforming(ObservableValue<String> text, Function<String, String> transformer) {
+		return Bindings.createStringBinding(()
+			-> {
+			Function<String, String> func = transformer == null ? Function.identity() : transformer;
+			return text.getValue() == null ? "" : func.apply(text.getValue());
+		}, text);
+	}
+
+	/**
+	 * Creates a string binding that contains the value of the given observable string transformed using the supplied
+	 * function.
+	 *
+	 * If the given observable string has a value of `null` the created binding will contain an empty string.
+	 *
+	 * If the given observable function has a value of `null` {@link Function#identity()} will be used instead.
+	 *
+	 * @param text
+	 *            the source string that will used for the conversion.
+	 * @param transformer
+	 *            a non-interfering, stateless function to apply to the source string.
+	 * @return a binding containing the transformed string.
+	 */
+	public static StringBinding transforming(ObservableValue<String> text, ObservableValue<Function<String, String>> transformer) {
+		return Bindings.createStringBinding(() -> {
+			Function<String, String> func = transformer.getValue() == null ? Function.identity() : transformer.getValue();
+			return text.getValue() == null ? "" : func.apply(text.getValue());
+		}, text, transformer);
 	}
 }

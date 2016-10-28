@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import org.junit.Test;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 import static eu.lestard.assertj.javafx.api.Assertions.assertThat;
 
@@ -189,4 +190,32 @@ public class StringBindingsTest {
         assertThat(uppercase).hasValue("TEST İ");
     }
 
+    @Test
+    public void testTransforming() {
+        StringProperty text = new SimpleStringProperty();
+        StringBinding transformed = StringBindings.transforming(text, s -> "*" + s + "*");
+
+        assertThat(transformed).hasValue("");
+
+        text.setValue("test");
+
+        assertThat(transformed).hasValue("*test*");
+    }
+
+    @Test
+    public void testTransformingWithObservableTransformer() {
+        StringProperty text = new SimpleStringProperty();
+        ObjectProperty<Function<String, String>> transformer = new SimpleObjectProperty<>();
+        StringBinding transformed = StringBindings.transforming(text, transformer);
+
+        assertThat(transformed).hasValue("");
+
+        text.setValue("test");
+
+        assertThat(transformed).hasValue("test");
+
+        transformer.setValue(s -> "**" + s + "**");
+
+        assertThat(transformed).hasValue("**test**");
+    }
 }
