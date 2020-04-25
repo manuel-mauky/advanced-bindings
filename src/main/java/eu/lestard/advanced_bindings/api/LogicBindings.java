@@ -45,10 +45,8 @@ public class LogicBindings {
     @SafeVarargs
     public static BooleanBinding and(ObservableValue<Boolean>...values) {
         return Bindings.createBooleanBinding(
-            ()-> !Arrays.stream(values)
-                .filter(observable -> !observable.getValue())
-                .findAny()
-                .isPresent(), values);
+            ()-> Arrays.stream(values)
+                .allMatch(observable -> observable.getValue()), values);
     }
 
     /**
@@ -81,9 +79,7 @@ public class LogicBindings {
     @SafeVarargs
     public static BooleanBinding or(ObservableValue<Boolean>...values) {
         return Bindings.createBooleanBinding(()-> Arrays.stream(values)
-            .filter(ObservableValue::getValue)
-            .findAny()
-            .isPresent(), values);
+            .anyMatch(observable -> observable.getValue()), values);
     }
 
     /**
